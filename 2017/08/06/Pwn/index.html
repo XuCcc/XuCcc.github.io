@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Pwn | Xu&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Pwn," />
+  
+
+  <meta name="description" content="Pwn  通用技巧 Linux命令 ROPgadget   GDB Pwntolls   栈溢出 ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc Ret2__libc_scu_init SROP     堆溢出 格式化字符串 参考文章    通用技巧 Linux命令 ROPgadget ROPgadget --binar">
+<meta name="keywords" content="Pwn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pwn">
+<meta property="og:url" content="http://yoursite.com/2017/08/06/Pwn/index.html">
+<meta property="og:site_name" content="Xu&#39;s Blog">
+<meta property="og:description" content="Pwn  通用技巧 Linux命令 ROPgadget   GDB Pwntolls   栈溢出 ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc Ret2__libc_scu_init SROP     堆溢出 格式化字符串 参考文章    通用技巧 Linux命令 ROPgadget ROPgadget --binar">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-06T07:45:18.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pwn">
+<meta name="twitter:description" content="Pwn  通用技巧 Linux命令 ROPgadget   GDB Pwntolls   栈溢出 ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc Ret2__libc_scu_init SROP     堆溢出 格式化字符串 参考文章    通用技巧 Linux命令 ROPgadget ROPgadget --binar">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Menu</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Menu</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Pwn"><span class="toc-text">Pwn</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通用技巧"><span class="toc-text">通用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux命令"><span class="toc-text">Linux命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ROPgadget"><span class="toc-text">ROPgadget</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GDB"><span class="toc-text">GDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pwntolls"><span class="toc-text">Pwntolls</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈溢出"><span class="toc-text">栈溢出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ROP"><span class="toc-text">ROP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ret2Text"><span class="toc-text">Ret2Text</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#题目"><span class="toc-text">题目</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ret2ShellCode"><span class="toc-text">Ret2ShellCode</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ret2SysCall"><span class="toc-text">Ret2SysCall</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#理论"><span class="toc-text">理论</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#相关题目"><span class="toc-text">相关题目</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ret2Libc"><span class="toc-text">Ret2Libc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ret2-libc-scu-init"><span class="toc-text">Ret2__libc_scu_init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SROP"><span class="toc-text">SROP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆溢出"><span class="toc-text">堆溢出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化字符串"><span class="toc-text">格式化字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-text">参考文章</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Pwn" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Pwn</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.08.06</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Xu</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.forsigner.com/2017/08/06/Pwn/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><!-- MarkdownTOC -->
+<ul>
+<li><a href="#%E9%80%9A%E7%94%A8%E6%8A%80%E5%B7%A7">通用技巧</a><ul>
+<li><a href="#linux%E5%91%BD%E4%BB%A4">Linux命令</a><ul>
+<li><a href="#ropgadget">ROPgadget</a></li>
+</ul>
+</li>
+<li><a href="#gdb">GDB</a></li>
+<li><a href="#pwntolls">Pwntolls</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A0%88%E6%BA%A2%E5%87%BA">栈溢出</a><ul>
+<li><a href="#rop">ROP</a><ul>
+<li><a href="#ret2text">Ret2Text</a><ul>
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+</ul>
+</li>
+<li><a href="#ret2shellcode">Ret2ShellCode</a></li>
+<li><a href="#ret2syscall">Ret2SysCall</a><ul>
+<li><a href="#%E7%90%86%E8%AE%BA">理论</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE">相关题目</a></li>
+</ul>
+</li>
+<li><a href="#ret2libc">Ret2Libc</a></li>
+<li><a href="#ret2libcscuinit">Ret2__libc_scu_init</a></li>
+<li><a href="#srop">SROP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%A0%86%E6%BA%A2%E5%87%BA">堆溢出</a></li>
+<li><a href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2">格式化字符串</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0">参考文章</a></li>
+</ul>
+<!-- /MarkdownTOC -->
+<p><a name="%E9%80%9A%E7%94%A8%E6%8A%80%E5%B7%A7"></a></p>
+<h2 id="通用技巧"><a href="#通用技巧" class="headerlink" title="通用技巧"></a>通用技巧</h2><p><a name="linux%E5%91%BD%E4%BB%A4"></a></p>
+<h3 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h3><p><a name="ropgadget"></a></p>
+<h4 id="ROPgadget"><a href="#ROPgadget" class="headerlink" title="ROPgadget"></a>ROPgadget</h4><ul>
+<li><code>ROPgadget --binary bin --string  &quot;/bin/sh&quot;</code></li>
+</ul>
+<p><a name="gdb"></a></p>
+<h3 id="GDB"><a href="#GDB" class="headerlink" title="GDB"></a>GDB</h3><p><a name="pwntolls"></a></p>
+<h3 id="Pwntolls"><a href="#Pwntolls" class="headerlink" title="Pwntolls"></a>Pwntolls</h3><p><a name="%E6%A0%88%E6%BA%A2%E5%87%BA"></a></p>
+<h2 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h2><p><a name="rop"></a></p>
+<h3 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h3><p><a name="ret2text"></a></p>
+<h4 id="Ret2Text"><a href="#Ret2Text" class="headerlink" title="Ret2Text"></a>Ret2Text</h4><p>ret2text即需要我们控制程序执行程序本身已有的的代码(.text)</p>
+<p><a name="%E9%A2%98%E7%9B%AE"></a></p>
+<h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h5><ul>
+<li><a href="https://github.com/ctfs/write-ups-2013/tree/master/pico-ctf-2013/rop-1" target="_blank" rel="external">pico-ctf-2013:rop-1</a></li>
+<li><a href="https://github.com/ctfs/write-ups-2013/tree/master/pico-ctf-2013/rop-2" target="_blank" rel="external">pico-ctf-2013:rop-2</a></li>
+</ul>
+<p><a name="ret2shellcode"></a></p>
+<h4 id="Ret2ShellCode"><a href="#Ret2ShellCode" class="headerlink" title="Ret2ShellCode"></a>Ret2ShellCode</h4><p>ret2shellcode需要我们控制程序执行shellcode代码。</p>
+<p><a name="ret2syscall"></a></p>
+<h4 id="Ret2SysCall"><a href="#Ret2SysCall" class="headerlink" title="Ret2SysCall"></a>Ret2SysCall</h4><p><a name="%E7%90%86%E8%AE%BA"></a></p>
+<h5 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h5><p>ret2syscall需要我们控制程序执行系统调用，获取shell  </p>
+<p>系统调用执行条件: </p>
+<ul>
+<li>把系统调用的编号存入 EAX  </li>
+<li>把函数参数存入其它通用寄存器  </li>
+<li>触发 0x80 号中断（int 0x80）  </li>
+</ul>
+<p>例如：</p>
+<p>执行<code>execve(&quot;/bin/sh&quot;,NULL,NULL)</code></p>
+<p>X86下</p>
+<ul>
+<li>系统调用号即eax应该为0xb</li>
+<li>第一个参数即ebx应该指向/bin/sh的地址</li>
+<li>第二个参数即ecx应该为0</li>
+<li>第三个参数edx应该为0</li>
+</ul>
+<p><a name="%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"></a></p>
+<h5 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h5><ul>
+<li><a href="http://vancir.com/posts/ret2syscall%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E7%A4%BA%E4%BE%8B" target="_blank" rel="external">ret2syscall攻击技术示例</a></li>
+</ul>
+<p><a name="ret2libc"></a></p>
+<h4 id="Ret2Libc"><a href="#Ret2Libc" class="headerlink" title="Ret2Libc"></a>Ret2Libc</h4><p>ret2libc即控制函数的执行 libc中的函数，通常是返回至某个函数的plt处或者函数的具体位置(即函数对应的got表项的内容)</p>
+<p><a name="ret2libcscuinit"></a></p>
+<h4 id="Ret2-libc-scu-init"><a href="#Ret2-libc-scu-init" class="headerlink" title="Ret2__libc_scu_init"></a>Ret2__libc_scu_init</h4><p><a name="srop"></a></p>
+<h4 id="SROP"><a href="#SROP" class="headerlink" title="SROP"></a>SROP</h4><p><a name="%E5%A0%86%E6%BA%A2%E5%87%BA"></a></p>
+<h2 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h2><p><a name="%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2"></a></p>
+<h2 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a>格式化字符串</h2><p><a name="%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"></a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2>
+    
+  </div>
+</article>
+
+
+   
+
+   
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2017/08/06/Pwn/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
