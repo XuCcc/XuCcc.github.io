@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Misc," />
+  <meta name="keywords" content="Pwn," />
 
 
 
@@ -101,20 +101,18 @@
 
 
 
-<meta name="description" content="Misc  编码转换 数字取证 &amp;amp;&amp;amp; 隐写分析 图片 通用技巧 常用命令   PNG JPG GIF   音频文件 压缩包 Zip   流量包 通用技巧 Wireshark tshark       脑图   编码转换 Other  代码类编码，附一个在线编辑器  知乎上有个讨论帖hello world in esoteric languages   BrainFuck +++++">
-<meta name="keywords" content="Misc">
+<meta name="description" content="栈溢出  ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc   Advanced ROP Ret2__libc_scu_init Ret2 dl_resolve SROP     ROPRet2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text) 题目 pico-ctf-2013:rop-1 p">
+<meta name="keywords" content="Pwn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Misc">
-<meta property="og:url" content="http://yoursite.com/2017/08/06/Misc/index.html">
+<meta property="og:title" content="栈溢出">
+<meta property="og:url" content="http://yoursite.com/CTF/Pwn/栈溢出/index.html">
 <meta property="og:site_name" content="Xu&#39;s Blog">
-<meta property="og:description" content="Misc  编码转换 数字取证 &amp;amp;&amp;amp; 隐写分析 图片 通用技巧 常用命令   PNG JPG GIF   音频文件 压缩包 Zip   流量包 通用技巧 Wireshark tshark       脑图   编码转换 Other  代码类编码，附一个在线编辑器  知乎上有个讨论帖hello world in esoteric languages   BrainFuck +++++">
+<meta property="og:description" content="栈溢出  ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc   Advanced ROP Ret2__libc_scu_init Ret2 dl_resolve SROP     ROPRet2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text) 题目 pico-ctf-2013:rop-1 p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/08/06/Misc/Misc.png">
-<meta property="og:updated_time" content="2017-08-07T13:32:39.395Z">
+<meta property="og:updated_time" content="2017-08-08T08:05:54.355Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Misc">
-<meta name="twitter:description" content="Misc  编码转换 数字取证 &amp;amp;&amp;amp; 隐写分析 图片 通用技巧 常用命令   PNG JPG GIF   音频文件 压缩包 Zip   流量包 通用技巧 Wireshark tshark       脑图   编码转换 Other  代码类编码，附一个在线编辑器  知乎上有个讨论帖hello world in esoteric languages   BrainFuck +++++">
-<meta name="twitter:image" content="http://yoursite.com/2017/08/06/Misc/Misc.png">
+<meta name="twitter:title" content="栈溢出">
+<meta name="twitter:description" content="栈溢出  ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc   Advanced ROP Ret2__libc_scu_init Ret2 dl_resolve SROP     ROPRet2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text) 题目 pico-ctf-2013:rop-1 p">
 
 
 
@@ -143,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/06/Misc/"/>
+  <link rel="canonical" href="http://yoursite.com/CTF/Pwn/栈溢出/"/>
 
 
 
 
 
-  <title>Misc | Xu's Blog</title>
+  <title>栈溢出 | Xu's Blog</title>
   
 
 
@@ -284,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/06/Misc/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/CTF/Pwn/栈溢出/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xu">
@@ -301,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Misc</h1>
+          <h1 class="post-title" itemprop="name headline">栈溢出</h1>
         
 
         <div class="post-meta">
@@ -313,8 +311,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-06T15:35:27+08:00">
-                2017-08-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-08T15:51:47+08:00">
+                2017-08-08
               </time>
             
 
@@ -329,8 +327,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-07T21:32:39+08:00">
-                2017-08-07
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-08T16:05:54+08:00">
+                2017-08-08
               </time>
             
           </span>
@@ -359,8 +357,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/Misc/" itemprop="url" rel="index">
-                    <span itemprop="name">Misc</span>
+                  <a href="/categories/CTF/Pwn/" itemprop="url" rel="index">
+                    <span itemprop="name">Pwn</span>
                   </a>
                 </span>
 
@@ -396,92 +394,57 @@
       
 
       
-        <h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><!-- MarkdownTOC -->
+        <h1 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h1><!-- MarkdownTOC -->
 <ul>
-<li><a href="#%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2">编码转换</a></li>
-<li><a href="#%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81--%E9%9A%90%E5%86%99%E5%88%86%E6%9E%90">数字取证 &amp;&amp; 隐写分析</a><ul>
-<li><a href="#%E5%9B%BE%E7%89%87">图片</a><ul>
-<li><a href="#%E9%80%9A%E7%94%A8%E6%8A%80%E5%B7%A7">通用技巧</a><ul>
-<li><a href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a></li>
+<li><a href="#rop">ROP</a><ul>
+<li><a href="#ret2text">Ret2Text</a><ul>
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
 </ul>
 </li>
-<li><a href="#png">PNG</a></li>
-<li><a href="#jpg">JPG</a></li>
-<li><a href="#gif">GIF</a></li>
+<li><a href="#ret2shellcode">Ret2ShellCode</a></li>
+<li><a href="#ret2syscall">Ret2SysCall</a><ul>
+<li><a href="#%E7%90%86%E8%AE%BA">理论</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE">相关题目</a></li>
 </ul>
 </li>
-<li><a href="#%E9%9F%B3%E9%A2%91%E6%96%87%E4%BB%B6">音频文件</a></li>
-<li><a href="#%E5%8E%8B%E7%BC%A9%E5%8C%85">压缩包</a><ul>
-<li><a href="#zip">Zip</a></li>
+<li><a href="#ret2libc">Ret2Libc</a></li>
 </ul>
 </li>
-<li><a href="#%E6%B5%81%E9%87%8F%E5%8C%85">流量包</a><ul>
-<li><a href="#%E9%80%9A%E7%94%A8%E6%8A%80%E5%B7%A7-1">通用技巧</a><ul>
-<li><a href="#wireshark">Wireshark</a></li>
-<li><a href="#tshark">tshark</a></li>
+<li><a href="#advanced-rop">Advanced ROP</a><ul>
+<li><a href="#ret2libcscuinit">Ret2__libc_scu_init</a></li>
+<li><a href="#ret2-dlresolve">Ret2 dl_resolve</a></li>
+<li><a href="#srop">SROP</a></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E8%84%91%E5%9B%BE">脑图</a></li>
 </ul>
 <!-- /MarkdownTOC -->
-<h2 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h2><ul>
-<li><p>Other</p>
+<h2 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h2><h3 id="Ret2Text"><a href="#Ret2Text" class="headerlink" title="Ret2Text"></a>Ret2Text</h3><p>ret2text即需要我们控制程序执行程序本身已有的的代码(.text)</p>
+<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><ul>
+<li><a href="https://github.com/ctfs/write-ups-2013/tree/master/pico-ctf-2013/rop-1" target="_blank" rel="external">pico-ctf-2013:rop-1</a></li>
+<li><a href="https://github.com/ctfs/write-ups-2013/tree/master/pico-ctf-2013/rop-2" target="_blank" rel="external">pico-ctf-2013:rop-2</a></li>
+</ul>
+<h3 id="Ret2ShellCode"><a href="#Ret2ShellCode" class="headerlink" title="Ret2ShellCode"></a>Ret2ShellCode</h3><p>ret2shellcode需要我们控制程序执行shellcode代码。</p>
+<h3 id="Ret2SysCall"><a href="#Ret2SysCall" class="headerlink" title="Ret2SysCall"></a>Ret2SysCall</h3><h4 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h4><p>ret2syscall需要我们控制程序执行系统调用，获取shell  </p>
+<p>系统调用执行条件: </p>
 <ul>
-<li><p>代码类编码，附一个<a href="https://tio.run/#" target="_blank" rel="external">在线编辑器</a></p>
-<blockquote>
-<p>知乎上有个<a href="https://www.zhihu.com/question/63387608" target="_blank" rel="external">讨论帖</a><br><a href="https://esolangs.org/wiki/Hello_world_program_in_esoteric_languages" target="_blank" rel="external">hello world in esoteric languages</a></p>
-</blockquote>
+<li>把系统调用的编号存入 EAX  </li>
+<li>把函数参数存入其它通用寄存器  </li>
+<li>触发 0x80 号中断（int 0x80）  </li>
+</ul>
+<p>例如：</p>
+<p>执行<code>execve(&quot;/bin/sh&quot;,NULL,NULL)</code></p>
+<p>X86下</p>
 <ul>
-<li><p><a href="http://tool.ph0en1x.com/brainfuck/" target="_blank" rel="external">BrainFuck</a></p>
-<p><code>++++++++++[&gt;+++++++&gt;++++++++++&gt;+++&gt;+&lt;&lt;&lt;&lt;-]&gt;++.&gt;+.+++++++..+++.&gt;++.&lt;&lt;+++++++++++++++.&gt;.+++.------.--------.&gt;+.&gt;.</code></p>
-</li>
-<li><p><a href="http://tool.ph0en1x.com/brainfuck/" target="_blank" rel="external">Ook</a></p>
-<p><code>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.Ook. Ook!</code></p>
-</li>
-<li><p>JsFuck</p>
-<p><code>[ ]( ) ! +</code></p>
-</li>
-<li><p><a href="http://tmxk.org/jother/" target="_blank" rel="external">Jother</a></p>
-<p><code>! + ( ) [ ] { }</code></p>
-</li>
+<li>系统调用号即eax应该为0xb</li>
+<li>第一个参数即ebx应该指向/bin/sh的地址</li>
+<li>第二个参数即ecx应该为0</li>
+<li>第三个参数edx应该为0</li>
 </ul>
-</li>
+<h4 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h4><ul>
+<li><a href="http://vancir.com/posts/ret2syscall%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E7%A4%BA%E4%BE%8B" target="_blank" rel="external">ret2syscall攻击技术示例</a></li>
 </ul>
-</li>
-</ul>
-<h2 id="数字取证-amp-amp-隐写分析"><a href="#数字取证-amp-amp-隐写分析" class="headerlink" title="数字取证 &amp;&amp; 隐写分析"></a>数字取证 &amp;&amp; 隐写分析</h2><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><h4 id="通用技巧"><a href="#通用技巧" class="headerlink" title="通用技巧"></a>通用技巧</h4><h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><ul>
-<li><a href="https://www.imagemagick.org/script/escape.php" target="_blank" rel="external">identift -format 参数</a></li>
-</ul>
-<h4 id="PNG"><a href="#PNG" class="headerlink" title="PNG"></a>PNG</h4><ul>
-<li><p>LSB隐写</p>
-</li>
-<li><p>Steg Software</p>
-</li>
-</ul>
-<h4 id="JPG"><a href="#JPG" class="headerlink" title="JPG"></a>JPG</h4><ul>
-<li>Steg Software</li>
-</ul>
-<h4 id="GIF"><a href="#GIF" class="headerlink" title="GIF"></a>GIF</h4><ul>
-<li>时间轴</li>
-<li>空间域</li>
-</ul>
-<h3 id="音频文件"><a href="#音频文件" class="headerlink" title="音频文件"></a>音频文件</h3><ul>
-<li>频谱</li>
-<li>波形</li>
-<li>Steg Software</li>
-</ul>
-<h3 id="压缩包"><a href="#压缩包" class="headerlink" title="压缩包"></a>压缩包</h3><h4 id="Zip"><a href="#Zip" class="headerlink" title="Zip"></a>Zip</h4><ul>
-<li>爆破</li>
-<li>CRC32爆破</li>
-<li>明文攻击</li>
-<li>伪加密</li>
-</ul>
-<h3 id="流量包"><a href="#流量包" class="headerlink" title="流量包"></a>流量包</h3><h4 id="通用技巧-1"><a href="#通用技巧-1" class="headerlink" title="通用技巧"></a>通用技巧</h4><h5 id="Wireshark"><a href="#Wireshark" class="headerlink" title="Wireshark"></a>Wireshark</h5><h5 id="tshark"><a href="#tshark" class="headerlink" title="tshark"></a>tshark</h5><h2 id="脑图"><a href="#脑图" class="headerlink" title="脑图"></a>脑图</h2><p><img src="/2017/08/06/Misc/Misc.png" alt="1"></p>
-
+<h3 id="Ret2Libc"><a href="#Ret2Libc" class="headerlink" title="Ret2Libc"></a>Ret2Libc</h3><p>ret2libc即控制函数的执行 libc中的函数，通常是返回至某个函数的plt处或者函数的具体位置(即函数对应的got表项的内容)</p>
+<h2 id="Advanced-ROP"><a href="#Advanced-ROP" class="headerlink" title="Advanced ROP"></a>Advanced ROP</h2><h3 id="Ret2-libc-scu-init"><a href="#Ret2-libc-scu-init" class="headerlink" title="Ret2__libc_scu_init"></a>Ret2__libc_scu_init</h3><h3 id="Ret2-dl-resolve"><a href="#Ret2-dl-resolve" class="headerlink" title="Ret2 dl_resolve"></a>Ret2 dl_resolve</h3><h3 id="SROP"><a href="#SROP" class="headerlink" title="SROP"></a>SROP</h3>
       
     </div>
     
@@ -498,7 +461,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Misc/" rel="tag"><i class="fa fa-tag"></i> Misc</a>
+            <a href="/tags/Pwn/" rel="tag"><i class="fa fa-tag"></i> Pwn</a>
           
         </div>
       
@@ -511,14 +474,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/CTF/Pwn/Pwn/" rel="next" title="Pwn">
+                <i class="fa fa-chevron-left"></i> Pwn
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/06/Pwn/" rel="prev" title="Pwn">
-                Pwn <i class="fa fa-chevron-right"></i>
+              <a href="/CTF/Writeup/RoutineTraining-Misc/" rel="prev" title="Routine Training:Misc">
+                Routine Training:Misc <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -596,7 +563,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -607,7 +574,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -677,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Misc"><span class="nav-text">Misc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编码转换"><span class="nav-text">编码转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字取证-amp-amp-隐写分析"><span class="nav-text">数字取证 && 隐写分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图片"><span class="nav-text">图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通用技巧"><span class="nav-text">通用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#常用命令"><span class="nav-text">常用命令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PNG"><span class="nav-text">PNG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JPG"><span class="nav-text">JPG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GIF"><span class="nav-text">GIF</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#音频文件"><span class="nav-text">音频文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩包"><span class="nav-text">压缩包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Zip"><span class="nav-text">Zip</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流量包"><span class="nav-text">流量包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通用技巧-1"><span class="nav-text">通用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Wireshark"><span class="nav-text">Wireshark</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tshark"><span class="nav-text">tshark</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脑图"><span class="nav-text">脑图</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#栈溢出"><span class="nav-text">栈溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP"><span class="nav-text">ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2Text"><span class="nav-text">Ret2Text</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2ShellCode"><span class="nav-text">Ret2ShellCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2SysCall"><span class="nav-text">Ret2SysCall</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理论"><span class="nav-text">理论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关题目"><span class="nav-text">相关题目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2Libc"><span class="nav-text">Ret2Libc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-ROP"><span class="nav-text">Advanced ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2-libc-scu-init"><span class="nav-text">Ret2__libc_scu_init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2-dl-resolve"><span class="nav-text">Ret2 dl_resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SROP"><span class="nav-text">SROP</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -717,7 +684,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共530字</span>
+  <span class="post-count">博客全站共2.0k字</span>
 </div>
         
 
