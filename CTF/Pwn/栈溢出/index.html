@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="Xu&#39;s Blog">
 <meta property="og:description" content="栈溢出  ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc   Advanced ROP Ret2__libc_scu_init Ret2 dl_resolve SROP     ROPRet2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text) 题目 pico-ctf-2013:rop-1 p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-08T08:05:54.355Z">
+<meta property="og:updated_time" content="2017-08-10T08:06:15.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="栈溢出">
 <meta name="twitter:description" content="栈溢出  ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc   Advanced ROP Ret2__libc_scu_init Ret2 dl_resolve SROP     ROPRet2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text) 题目 pico-ctf-2013:rop-1 p">
@@ -327,8 +327,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-08T16:05:54+08:00">
-                2017-08-08
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-10T16:06:15+08:00">
+                2017-08-10
               </time>
             
           </span>
@@ -422,6 +422,7 @@
 <h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><ul>
 <li><a href="https://github.com/ctfs/write-ups-2013/tree/master/pico-ctf-2013/rop-1" target="_blank" rel="external">pico-ctf-2013:rop-1</a></li>
 <li><a href="https://github.com/ctfs/write-ups-2013/tree/master/pico-ctf-2013/rop-2" target="_blank" rel="external">pico-ctf-2013:rop-2</a></li>
+<li><a href="/CTF/Writeup/RoutineTraining-Pwn/#Pwnme200">湖湘杯-2016：Pwnme</a></li>
 </ul>
 <h3 id="Ret2ShellCode"><a href="#Ret2ShellCode" class="headerlink" title="Ret2ShellCode"></a>Ret2ShellCode</h3><p>ret2shellcode需要我们控制程序执行shellcode代码。</p>
 <h3 id="Ret2SysCall"><a href="#Ret2SysCall" class="headerlink" title="Ret2SysCall"></a>Ret2SysCall</h3><h4 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h4><p>ret2syscall需要我们控制程序执行系统调用，获取shell  </p>
@@ -444,6 +445,9 @@
 <li><a href="http://vancir.com/posts/ret2syscall%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E7%A4%BA%E4%BE%8B" target="_blank" rel="external">ret2syscall攻击技术示例</a></li>
 </ul>
 <h3 id="Ret2Libc"><a href="#Ret2Libc" class="headerlink" title="Ret2Libc"></a>Ret2Libc</h3><p>ret2libc即控制函数的执行 libc中的函数，通常是返回至某个函数的plt处或者函数的具体位置(即函数对应的got表项的内容)</p>
+<ul>
+<li><a href="/CTF/Writeup/RoutineTraining-Pwn/#R0pbaby">Defcon 2015 Qualifier：R0pbaby</a></li>
+</ul>
 <h2 id="Advanced-ROP"><a href="#Advanced-ROP" class="headerlink" title="Advanced ROP"></a>Advanced ROP</h2><h3 id="Ret2-libc-scu-init"><a href="#Ret2-libc-scu-init" class="headerlink" title="Ret2__libc_scu_init"></a>Ret2__libc_scu_init</h3><h3 id="Ret2-dl-resolve"><a href="#Ret2-dl-resolve" class="headerlink" title="Ret2 dl_resolve"></a>Ret2 dl_resolve</h3><h3 id="SROP"><a href="#SROP" class="headerlink" title="SROP"></a>SROP</h3>
       
     </div>
@@ -563,7 +567,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -684,7 +688,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共2.0k字</span>
+  <span class="post-count">博客全站共2.3k字</span>
 </div>
         
 
