@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="栈溢出  ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc   Advanced ROP Ret2__libc_scu_init Ret2 dl_resolve SROP      ROP Ret2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text)  题目 pico-ctf-2013:rop-">
+<meta name="description" content="ROP Ret2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text)  题目 pico-ctf-2013:rop-1 pico-ctf-2013:rop-2 湖湘杯-2016：Pwnme   Ret2ShellCoderet2shellcode需要我们控制程序执行shellcode代码。  Ret2SysCall 理论ret2syscall需要我们控制程序执行系统调用">
 <meta name="keywords" content="Pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="栈溢出">
 <meta property="og:url" content="http://yoursite.com/CTF/Pwn/栈溢出/index.html">
 <meta property="og:site_name" content="Xu&#39;s Blog">
-<meta property="og:description" content="栈溢出  ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc   Advanced ROP Ret2__libc_scu_init Ret2 dl_resolve SROP      ROP Ret2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text)  题目 pico-ctf-2013:rop-">
+<meta property="og:description" content="ROP Ret2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text)  题目 pico-ctf-2013:rop-1 pico-ctf-2013:rop-2 湖湘杯-2016：Pwnme   Ret2ShellCoderet2shellcode需要我们控制程序执行shellcode代码。  Ret2SysCall 理论ret2syscall需要我们控制程序执行系统调用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-24T08:15:45.047Z">
+<meta property="og:updated_time" content="2017-08-25T09:55:09.902Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="栈溢出">
-<meta name="twitter:description" content="栈溢出  ROP Ret2Text 题目   Ret2ShellCode Ret2SysCall 理论 相关题目   Ret2Libc   Advanced ROP Ret2__libc_scu_init Ret2 dl_resolve SROP      ROP Ret2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text)  题目 pico-ctf-2013:rop-">
+<meta name="twitter:description" content="ROP Ret2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text)  题目 pico-ctf-2013:rop-1 pico-ctf-2013:rop-2 湖湘杯-2016：Pwnme   Ret2ShellCoderet2shellcode需要我们控制程序执行shellcode代码。  Ret2SysCall 理论ret2syscall需要我们控制程序执行系统调用">
 
 
 
@@ -327,8 +327,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-24T16:15:45+08:00">
-                2017-08-24
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:09+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -394,31 +394,7 @@
       
 
       
-        <h1 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h1><!-- MarkdownTOC -->
-<ul>
-<li><a href="#rop">ROP</a><ul>
-<li><a href="#ret2text">Ret2Text</a><ul>
-<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
-</ul>
-</li>
-<li><a href="#ret2shellcode">Ret2ShellCode</a></li>
-<li><a href="#ret2syscall">Ret2SysCall</a><ul>
-<li><a href="#%E7%90%86%E8%AE%BA">理论</a></li>
-<li><a href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE">相关题目</a></li>
-</ul>
-</li>
-<li><a href="#ret2libc">Ret2Libc</a></li>
-</ul>
-</li>
-<li><a href="#advanced-rop">Advanced ROP</a><ul>
-<li><a href="#ret2libcscuinit">Ret2__libc_scu_init</a></li>
-<li><a href="#ret2-dlresolve">Ret2 dl_resolve</a></li>
-<li><a href="#srop">SROP</a></li>
-</ul>
-</li>
-</ul>
-<!-- /MarkdownTOC -->
-<p><a name="rop"></a></p>
+        <p><a name="rop"></a></p>
 <h2 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h2><p><a name="ret2text"></a></p>
 <h3 id="Ret2Text"><a href="#Ret2Text" class="headerlink" title="Ret2Text"></a>Ret2Text</h3><p>ret2text即需要我们控制程序执行程序本身已有的的代码(.text)</p>
 <p><a name="%E9%A2%98%E7%9B%AE"></a></p>
@@ -579,7 +555,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -660,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#栈溢出"><span class="nav-text">栈溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP"><span class="nav-text">ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2Text"><span class="nav-text">Ret2Text</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2ShellCode"><span class="nav-text">Ret2ShellCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2SysCall"><span class="nav-text">Ret2SysCall</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理论"><span class="nav-text">理论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关题目"><span class="nav-text">相关题目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2Libc"><span class="nav-text">Ret2Libc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-ROP"><span class="nav-text">Advanced ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2-libc-scu-init"><span class="nav-text">Ret2__libc_scu_init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2-dl-resolve"><span class="nav-text">Ret2 dl_resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SROP"><span class="nav-text">SROP</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP"><span class="nav-text">ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2Text"><span class="nav-text">Ret2Text</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2ShellCode"><span class="nav-text">Ret2ShellCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2SysCall"><span class="nav-text">Ret2SysCall</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理论"><span class="nav-text">理论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关题目"><span class="nav-text">相关题目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2Libc"><span class="nav-text">Ret2Libc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-ROP"><span class="nav-text">Advanced ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2-libc-scu-init"><span class="nav-text">Ret2__libc_scu_init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ret2-dl-resolve"><span class="nav-text">Ret2 dl_resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SROP"><span class="nav-text">SROP</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -700,7 +676,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.0k字</span>
+  <span class="post-count">博客全站共5.3k字</span>
 </div>
         
 

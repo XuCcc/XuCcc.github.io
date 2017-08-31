@@ -279,6 +279,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/CTF/Writeup/Pwnable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/CTF/Writeup/Pwnable/" itemprop="url">Pwnable.kr Writeup</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T22:33:39+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-31T21:37:24+08:00">
+                2017-08-31
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/Writeup/" itemprop="url" rel="index">
+                    <span itemprop="name">Writeup</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          fd连上去后查看源码
+#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;string.h&gt;char buf[32];int main(int argc, char* argv[], char* envp[])&#123;
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/CTF/Writeup/Pwnable/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/CTF/Writeup/JarvisOJ/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -326,7 +498,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:51:38+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:53:54+08:00">
                 2017-08-25
               </time>
             
@@ -395,9 +567,9 @@
       
         
           
-          JarvisOJ WriteupPwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可
+          Pwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可
 Vuln:
-ssize_t vulnerable_function()&#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0,
+ssize_t vulnerable_function()&#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;buf, 0x200
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -499,8 +671,8 @@ ssize_t vulnerable_function()&#123;  char buf; // [sp+0h] [bp-80h]@1  return rea
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-23T23:59:24+08:00">
-                2017-08-23
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:15+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -568,11 +740,11 @@ ssize_t vulnerable_function()&#123;  char buf; // [sp+0h] [bp-80h]@1  return rea
       
         
           
-          JSP原理JSP全称是Java Server Pages，SUN公司定义的一种用于开发动态web资源的技术。访问JSP时服务器将其翻译为一个Servlet，其中的Java被_jspService处理
+          原理JSP全称是Java Server Pages，SUN公司定义的一种用于开发动态web资源的技术。访问JSP时服务器将其翻译为一个Servlet，其中的Java被_jspService处理
 Tomcat执行过程：
 
 基础语法JSP模板元素指JSP中的HTML内容，其定义了网页的结构和外观
-
+JSP
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -812,8 +984,8 @@ Tomcat执行过程：
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-10T16:04:59+08:00">
-                2017-08-10
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:53+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -881,20 +1053,8 @@ Tomcat执行过程：
       
         
           
-          
-
-Defcon 2015 Qualifier
-R0pbaby
-
-
-湖湘杯 2016
-Pwnme200
-
-
-
-
-Defcon 2015 QualifierR0pbabyVuln Points:
-__int64 sub_C46()&#123;  signed int v0; // eax@4  uns
+          Defcon 2015 QualifierR0pbabyVuln Points:
+__int64 sub_C46()&#123;  signed int v0; // eax@4  unsigned __int64 v1; // r14@15  int v2; // er13@17  size_t 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -996,8 +1156,8 @@ __int64 sub_C46()&#123;  signed int v0; // eax@4  uns
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-08T16:54:25+08:00">
-                2017-08-08
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:33+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -1065,29 +1225,7 @@ __int64 sub_C46()&#123;  signed int v0; // eax@4  uns
       
         
           
-          Nebula Writeup
-
-level00
-About
-Key Points
-Writeup
-
-
-level 01
-About
-SourceCode
-Key Points
-Writeup
-
-
-level02
-About
-SourceCode
-Key Points
-Writeups
-
-
-level
+          Nebula Writeuplevel00AboutThis level requires you to find a Set User ID program that will run as the “flag00” account. You could also find this by car
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1189,8 +1327,8 @@ level
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-09T14:21:36+08:00">
-                2017-08-09
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:47+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -1258,23 +1396,17 @@ level
       
         
           
-          Routine Training:Misc
-
-Break In 2017
-Mysterious GIF
-
-
-AlexCTF-2017
-USB probing
-
-
-
-
-Break In 2017Mysterious GIF
+          Break In 2017Mysterious GIF
 Step 1
 
 binwalk 发现有额外数据
-继续对temp.zip文件进行
+继续对temp.zip文件进行binwalk，发现有大量zip
+解压出来是一堆加密过的文件
+
+Step 2
+
+继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取
+$ i
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1376,8 +1508,8 @@ binwalk 发现有额外数据
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-24T16:15:45+08:00">
-                2017-08-24
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:09+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -1445,33 +1577,17 @@ binwalk 发现有额外数据
       
         
           
-          栈溢出
-
+          
 ROP
-Ret2Text
+Ret2Textret2text即需要我们控制程序执行程序本身已有的的代码(.text)
+
 题目
+pico-ctf-2013:rop-1
+pico-ctf-2013:rop-2
+湖湘杯-2016：Pwnme
 
 
-Ret2ShellCode
-Ret2SysCall
-理论
-相关题目
-
-
-Ret2Libc
-
-
-Advanced ROP
-Ret2__libc_scu_init
-Ret2 dl_resolve
-SROP
-
-
-
-
-
-ROP
-Ret2Textret2text即
+Ret2ShellCoderet2shellcode需要我们控制程序执行she
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1573,8 +1689,8 @@ Ret2Textret2text即
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-24T15:24:32+08:00">
-                2017-08-24
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:39+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -1642,32 +1758,17 @@ Ret2Textret2text即
       
         
           
-          Pwn
-
-通用技巧
-Linux命令
-readelf
-ROPgadget
-
-
-GDB
-peda
-pwndbg
-
-
-Pwntools
-
-
-栈溢出
-
-
-
+          
 通用技巧
 Linux命令
 readelf
 ELF header: readelf -h
 .dynamic section: readelf -d
-.re
+.rel.plt;.rel.dyn section: readelf -r
+.dynsym section: readelf -s
+
+
+ROPgadge
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1769,8 +1870,8 @@ ELF header: readelf -h
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-10T15:43:39+08:00">
-                2017-08-10
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:25+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -1838,47 +1939,16 @@ ELF header: readelf -h
       
         
           
-          Misc
-
-编码转换
-数字取证 &amp;&amp; 隐写分析
-图片
-通用技巧
-常用命令
-
-
-PNG
-JPG
-GIF
-文件格式
-时间轴
-空间域
-
-
-
-
-音频文件
-压缩包
-Zip
-
-
-流量包
-通用技巧
-Wireshark
-tshark
-
-
-
-
-
-
-脑图
-
-
-编码转换
+          编码转换
 Other
 
-代码类编码，附一个在
+代码类编码，附一个在线编辑器
+
+知乎上有个讨论帖hello world in esoteric languages
+
+
+BrainFuck
+++++++++++[&gt;+++++++&gt;++++++++++&gt;+++&gt;+&lt;&lt;&lt;&lt;-]&g
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1966,7 +2036,7 @@ Other
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2071,7 +2141,7 @@ Other
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.0k字</span>
+  <span class="post-count">博客全站共5.3k字</span>
 </div>
         
 

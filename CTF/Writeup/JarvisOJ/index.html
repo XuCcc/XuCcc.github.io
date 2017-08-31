@@ -101,19 +101,19 @@
 
 
 
-<meta name="description" content="JarvisOJ WriteupPwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可 Vuln: ssize_t vulnerable_function()&amp;#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;amp;buf, 0x200uLL);&amp;#125; Exp: from pwn import *">
+<meta name="description" content="Pwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可 Vuln: ssize_t vulnerable_function()&amp;#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;amp;buf, 0x200uLL);&amp;#125; Exp: from pwn import *pwn_file = &quot;leve">
 <meta name="keywords" content="Pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JarvisOJ">
 <meta property="og:url" content="http://yoursite.com/CTF/Writeup/JarvisOJ/index.html">
 <meta property="og:site_name" content="Xu&#39;s Blog">
-<meta property="og:description" content="JarvisOJ WriteupPwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可 Vuln: ssize_t vulnerable_function()&amp;#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;amp;buf, 0x200uLL);&amp;#125; Exp: from pwn import *">
+<meta property="og:description" content="Pwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可 Vuln: ssize_t vulnerable_function()&amp;#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;amp;buf, 0x200uLL);&amp;#125; Exp: from pwn import *pwn_file = &quot;leve">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/CTF/Writeup/JarvisOJ/1.png">
-<meta property="og:updated_time" content="2017-08-25T09:51:38.811Z">
+<meta property="og:updated_time" content="2017-08-25T09:53:54.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JarvisOJ">
-<meta name="twitter:description" content="JarvisOJ WriteupPwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可 Vuln: ssize_t vulnerable_function()&amp;#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;amp;buf, 0x200uLL);&amp;#125; Exp: from pwn import *">
+<meta name="twitter:description" content="Pwn[XMAN]Level0程序中存在callsystem函数，栈溢出改返回地址即可 Vuln: ssize_t vulnerable_function()&amp;#123;  char buf; // [sp+0h] [bp-80h]@1  return read(0, &amp;amp;buf, 0x200uLL);&amp;#125; Exp: from pwn import *pwn_file = &quot;leve">
 <meta name="twitter:image" content="http://yoursite.com/CTF/Writeup/JarvisOJ/1.png">
 
 
@@ -329,7 +329,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:51:38+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:53:54+08:00">
                 2017-08-25
               </time>
             
@@ -396,7 +396,7 @@
       
 
       
-        <h1 id="JarvisOJ-Writeup"><a href="#JarvisOJ-Writeup" class="headerlink" title="JarvisOJ Writeup"></a>JarvisOJ Writeup</h1><h2 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h2><h3 id="XMAN-Level0"><a href="#XMAN-Level0" class="headerlink" title="[XMAN]Level0"></a>[XMAN]Level0</h3><p>程序中存在<code>callsystem</code>函数，栈溢出改返回地址即可</p>
+        <h2 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h2><h3 id="XMAN-Level0"><a href="#XMAN-Level0" class="headerlink" title="[XMAN]Level0"></a>[XMAN]Level0</h3><p>程序中存在<code>callsystem</code>函数，栈溢出改返回地址即可</p>
 <div class="note info"><p>Vuln:</p></div>
 <figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="keyword">ssize_t</span> vulnerable_function()</div><div class="line">&#123;</div><div class="line">  <span class="keyword">char</span> buf; <span class="comment">// [sp+0h] [bp-80h]@1</span></div><div class="line"></div><div class="line">  <span class="keyword">return</span> read(<span class="number">0</span>, &amp;buf, <span class="number">0x200</span>uLL);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <div class="note success"><p>Exp:</p></div>
@@ -541,6 +541,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/CTF/Writeup/Pwnable/" rel="prev" title="Pwnable.kr Writeup">
+                Pwnable.kr Writeup <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -616,7 +620,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -697,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JarvisOJ-Writeup"><span class="nav-text">JarvisOJ Writeup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pwn"><span class="nav-text">Pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XMAN-Level0"><span class="nav-text">[XMAN]Level0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMAN-level2-x64"><span class="nav-text">[XMAN]level2(x64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMAN-level3-x64"><span class="nav-text">[XMAN]level3(x64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-Your-Memory"><span class="nav-text">Test Your Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tell-Me-Somethine"><span class="nav-text">Tell Me Somethine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Smashes"><span class="nav-text">Smashes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guess"><span class="nav-text">Guess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#61dctf-fm"><span class="nav-text">[61dctf]fm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web"><span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#神盾局的秘密"><span class="nav-text">神盾局的秘密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Login"><span class="nav-text">Login</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Simple-Injection"><span class="nav-text">Simple Injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Please-use-port-51-to-visit-this-site"><span class="nav-text">Please use port 51 to visit this site.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In-a-mess"><span class="nav-text">In a mess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Easy-Gallery"><span class="nav-text">Easy Gallery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phpinfo"><span class="nav-text">Phpinfo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片上传"><span class="nav-text">图片上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Misc"><span class="nav-text">Misc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pwn"><span class="nav-text">Pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XMAN-Level0"><span class="nav-text">[XMAN]Level0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMAN-level2-x64"><span class="nav-text">[XMAN]level2(x64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMAN-level3-x64"><span class="nav-text">[XMAN]level3(x64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-Your-Memory"><span class="nav-text">Test Your Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tell-Me-Somethine"><span class="nav-text">Tell Me Somethine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Smashes"><span class="nav-text">Smashes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guess"><span class="nav-text">Guess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#61dctf-fm"><span class="nav-text">[61dctf]fm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web"><span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#神盾局的秘密"><span class="nav-text">神盾局的秘密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Login"><span class="nav-text">Login</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Simple-Injection"><span class="nav-text">Simple Injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Please-use-port-51-to-visit-this-site"><span class="nav-text">Please use port 51 to visit this site.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In-a-mess"><span class="nav-text">In a mess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Easy-Gallery"><span class="nav-text">Easy Gallery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phpinfo"><span class="nav-text">Phpinfo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片上传"><span class="nav-text">图片上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Misc"><span class="nav-text">Misc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -737,7 +741,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.0k字</span>
+  <span class="post-count">博客全站共5.3k字</span>
 </div>
         
 

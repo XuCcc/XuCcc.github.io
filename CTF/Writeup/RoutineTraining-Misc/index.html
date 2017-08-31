@@ -101,19 +101,19 @@
 
 
 
-<meta name="description" content="Routine Training:Misc  Break In 2017 Mysterious GIF   AlexCTF-2017 USB probing     Break In 2017Mysterious GIF Step 1  binwalk 发现有额外数据 继续对temp.zip文件进行binwalk，发现有大量zip 解压出来是一堆加密过的文件  Step 2  继续分析gif文件，">
+<meta name="description" content="Break In 2017Mysterious GIF Step 1  binwalk 发现有额外数据 继续对temp.zip文件进行binwalk，发现有大量zip 解压出来是一堆加密过的文件  Step 2  继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取 $ identify -format &quot;%s %c \n&quot; Question.gif 0 4d494945">
 <meta name="keywords" content="Misc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Routine Training:Misc">
 <meta property="og:url" content="http://yoursite.com/CTF/Writeup/RoutineTraining-Misc/index.html">
 <meta property="og:site_name" content="Xu&#39;s Blog">
-<meta property="og:description" content="Routine Training:Misc  Break In 2017 Mysterious GIF   AlexCTF-2017 USB probing     Break In 2017Mysterious GIF Step 1  binwalk 发现有额外数据 继续对temp.zip文件进行binwalk，发现有大量zip 解压出来是一堆加密过的文件  Step 2  继续分析gif文件，">
+<meta property="og:description" content="Break In 2017Mysterious GIF Step 1  binwalk 发现有额外数据 继续对temp.zip文件进行binwalk，发现有大量zip 解压出来是一堆加密过的文件  Step 2  继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取 $ identify -format &quot;%s %c \n&quot; Question.gif 0 4d494945">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/CTF/Writeup/RoutineTraining-Misc/Usb%20Probing">
-<meta property="og:updated_time" content="2017-08-09T06:21:36.556Z">
+<meta property="og:updated_time" content="2017-08-25T09:55:47.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Routine Training:Misc">
-<meta name="twitter:description" content="Routine Training:Misc  Break In 2017 Mysterious GIF   AlexCTF-2017 USB probing     Break In 2017Mysterious GIF Step 1  binwalk 发现有额外数据 继续对temp.zip文件进行binwalk，发现有大量zip 解压出来是一堆加密过的文件  Step 2  继续分析gif文件，">
+<meta name="twitter:description" content="Break In 2017Mysterious GIF Step 1  binwalk 发现有额外数据 继续对temp.zip文件进行binwalk，发现有大量zip 解压出来是一堆加密过的文件  Step 2  继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取 $ identify -format &quot;%s %c \n&quot; Question.gif 0 4d494945">
 <meta name="twitter:image" content="http://yoursite.com/CTF/Writeup/RoutineTraining-Misc/Usb%20Probing">
 
 
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-09T14:21:36+08:00">
-                2017-08-09
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:47+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -396,19 +396,7 @@
       
 
       
-        <h1 id="Routine-Training-Misc"><a href="#Routine-Training-Misc" class="headerlink" title="Routine Training:Misc"></a>Routine Training:Misc</h1><!-- MarkdownTOC -->
-<ul>
-<li><a href="#break-in-2017">Break In 2017</a><ul>
-<li><a href="#mysterious-gif">Mysterious GIF</a></li>
-</ul>
-</li>
-<li><a href="#alexctf-2017">AlexCTF-2017</a><ul>
-<li><a href="#usb-probing">USB probing</a></li>
-</ul>
-</li>
-</ul>
-<!-- /MarkdownTOC -->
-<h2 id="Break-In-2017"><a href="#Break-In-2017" class="headerlink" title="Break In 2017"></a>Break In 2017</h2><h3 id="Mysterious-GIF"><a href="#Mysterious-GIF" class="headerlink" title="Mysterious GIF"></a>Mysterious GIF</h3><ul>
+        <h2 id="Break-In-2017"><a href="#Break-In-2017" class="headerlink" title="Break In 2017"></a>Break In 2017</h2><h3 id="Mysterious-GIF"><a href="#Mysterious-GIF" class="headerlink" title="Mysterious GIF"></a>Mysterious GIF</h3><ul>
 <li>Step 1</li>
 </ul>
 <p><code>binwalk</code> 发现有额外数据</p>
@@ -418,7 +406,7 @@
 <li>Step 2</li>
 </ul>
 <p>继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> identify -format <span class="string">"%s %c \n"</span> Question.gif </span></div><div class="line">0 4d494945767749424144414e42676b71686b6947397730424151454641415343424b6b776767536c41674541416f4942415144644d4e624c3571565769435172</div><div class="line">...</div><div class="line">24 484b7735432b667741586c4649746d30396145565458772b787a4c4a623253723667415450574d35715661756278667362356d58482f77443969434c684a536f</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span> identify -format "%s %c \n" Question.gif </div><div class="line">0 4d494945767749424144414e42676b71686b6947397730424151454641415343424b6b776767536c41674541416f4942415144644d4e624c3571565769435172</div><div class="line">...</div><div class="line">24 484b7735432b667741586c4649746d30396145565458772b787a4c4a623253723667415450574d35715661756278667362356d58482f77443969434c684a536f</div></pre></td></tr></table></figure>
 <ul>
 <li>Step 3</li>
 </ul>
@@ -429,9 +417,9 @@
 <li>Step 4</li>
 </ul>
 <p>对由<code>temp.zip</code>得到的一堆文件进行解密</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash">openssl rsautl -decrypt -inkey ../key -<span class="keyword">in</span> partaa.enc </span></div><div class="line">JFIFC</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span>openssl rsautl -decrypt -inkey ../key -in partaa.enc </div><div class="line">JFIFC</div></pre></td></tr></table></figure>
 <p>有第一份文件解密结果猜测此为一个完整的Jpg文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="keyword">for</span> i <span class="keyword">in</span> `ls`</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">&gt; <span class="keyword">do</span></span></div><div class="line"><span class="meta">&gt;</span><span class="bash">&gt; openssl rsautl -decrypt -inkey ../key  -<span class="keyword">in</span> <span class="variable">$i</span> &gt;&gt; flag.jpg</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">&gt; <span class="keyword">done</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span> for i in `ls`</div><div class="line"><span class="meta">&gt;</span>&gt; do</div><div class="line"><span class="meta">&gt;</span>&gt; openssl rsautl -decrypt -inkey ../key  -in $i &gt;&gt; flag.jpg</div><div class="line"><span class="meta">&gt;</span>&gt; done</div></pre></td></tr></table></figure>
 <h2 id="AlexCTF-2017"><a href="#AlexCTF-2017" class="headerlink" title="AlexCTF-2017"></a>AlexCTF-2017</h2><h3 id="USB-probing"><a href="#USB-probing" class="headerlink" title="USB probing"></a>USB probing</h3><ul>
 <li>Step 1</li>
 </ul>
@@ -566,7 +554,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -647,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Routine-Training-Misc"><span class="nav-text">Routine Training:Misc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Break-In-2017"><span class="nav-text">Break In 2017</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysterious-GIF"><span class="nav-text">Mysterious GIF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AlexCTF-2017"><span class="nav-text">AlexCTF-2017</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#USB-probing"><span class="nav-text">USB probing</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Break-In-2017"><span class="nav-text">Break In 2017</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysterious-GIF"><span class="nav-text">Mysterious GIF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AlexCTF-2017"><span class="nav-text">AlexCTF-2017</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#USB-probing"><span class="nav-text">USB probing</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -687,7 +675,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.0k字</span>
+  <span class="post-count">博客全站共5.3k字</span>
 </div>
         
 

