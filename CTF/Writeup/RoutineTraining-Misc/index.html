@@ -406,7 +406,7 @@
 <li>Step 2</li>
 </ul>
 <p>继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span> identify -format "%s %c \n" Question.gif </div><div class="line">0 4d494945767749424144414e42676b71686b6947397730424151454641415343424b6b776767536c41674541416f4942415144644d4e624c3571565769435172</div><div class="line">...</div><div class="line">24 484b7735432b667741586c4649746d30396145565458772b787a4c4a623253723667415450574d35715661756278667362356d58482f77443969434c684a536f</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> identify -format <span class="string">"%s %c \n"</span> Question.gif </span></div><div class="line">0 4d494945767749424144414e42676b71686b6947397730424151454641415343424b6b776767536c41674541416f4942415144644d4e624c3571565769435172</div><div class="line">...</div><div class="line">24 484b7735432b667741586c4649746d30396145565458772b787a4c4a623253723667415450574d35715661756278667362356d58482f77443969434c684a536f</div></pre></td></tr></table></figure>
 <ul>
 <li>Step 3</li>
 </ul>
@@ -417,9 +417,9 @@
 <li>Step 4</li>
 </ul>
 <p>对由<code>temp.zip</code>得到的一堆文件进行解密</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span>openssl rsautl -decrypt -inkey ../key -in partaa.enc </div><div class="line">JFIFC</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash">openssl rsautl -decrypt -inkey ../key -<span class="keyword">in</span> partaa.enc </span></div><div class="line">JFIFC</div></pre></td></tr></table></figure>
 <p>有第一份文件解密结果猜测此为一个完整的Jpg文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span> for i in `ls`</div><div class="line"><span class="meta">&gt;</span>&gt; do</div><div class="line"><span class="meta">&gt;</span>&gt; openssl rsautl -decrypt -inkey ../key  -in $i &gt;&gt; flag.jpg</div><div class="line"><span class="meta">&gt;</span>&gt; done</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="keyword">for</span> i <span class="keyword">in</span> `ls`</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">&gt; <span class="keyword">do</span></span></div><div class="line"><span class="meta">&gt;</span><span class="bash">&gt; openssl rsautl -decrypt -inkey ../key  -<span class="keyword">in</span> <span class="variable">$i</span> &gt;&gt; flag.jpg</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">&gt; <span class="keyword">done</span></span></div></pre></td></tr></table></figure>
 <h2 id="AlexCTF-2017"><a href="#AlexCTF-2017" class="headerlink" title="AlexCTF-2017"></a>AlexCTF-2017</h2><h3 id="USB-probing"><a href="#USB-probing" class="headerlink" title="USB probing"></a>USB probing</h3><ul>
 <li>Step 1</li>
 </ul>
@@ -675,7 +675,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.3k字</span>
+  <span class="post-count">博客全站共5.6k字</span>
 </div>
         
 
