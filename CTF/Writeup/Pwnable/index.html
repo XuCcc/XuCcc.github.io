@@ -38,6 +38,8 @@
 
 
 
+  <meta name="baidu-site-verification" content="true" />
+
 
 
 
@@ -105,16 +107,16 @@
 <meta name="keywords" content="Pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pwnable.kr Writeup">
-<meta property="og:url" content="http://yoursite.com/CTF/Writeup/Pwnable/index.html">
+<meta property="og:url" content="https://xuccc.github.io/CTF/Writeup/Pwnable/index.html">
 <meta property="og:site_name" content="Xu&#39;s Blog">
 <meta property="og:description" content="fd连上去后查看源码 #include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;string.h&amp;gt;char buf[32];int main(int argc, char* argv[], char* envp[])&amp;#123;	if(argc&amp;lt;2)&amp;#123;		printf(&quot;pass argv[1] a numbe">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/CTF/Writeup/Pwnable/1.png">
-<meta property="og:updated_time" content="2017-09-01T15:32:10.632Z">
+<meta property="og:image" content="https://xuccc.github.io/CTF/Writeup/Pwnable/1.png">
+<meta property="og:updated_time" content="2017-09-02T09:03:29.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pwnable.kr Writeup">
 <meta name="twitter:description" content="fd连上去后查看源码 #include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;string.h&amp;gt;char buf[32];int main(int argc, char* argv[], char* envp[])&amp;#123;	if(argc&amp;lt;2)&amp;#123;		printf(&quot;pass argv[1] a numbe">
-<meta name="twitter:image" content="http://yoursite.com/CTF/Writeup/Pwnable/1.png">
+<meta name="twitter:image" content="https://xuccc.github.io/CTF/Writeup/Pwnable/1.png">
 
 
 
@@ -143,11 +145,14 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/CTF/Writeup/Pwnable/"/>
+  <link rel="canonical" href="https://xuccc.github.io/CTF/Writeup/Pwnable/"/>
 
 
 
 
+
+
+  <meta name="baidu-site-verification" content="duMbzygXrP" />
 
   <title>Pwnable.kr Writeup | Xu's Blog</title>
   
@@ -155,6 +160,16 @@
 
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?90ca7991e7c5120f0f5dc445ab24bd9a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -284,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/CTF/Writeup/Pwnable/">
+    <link itemprop="mainEntityOfPage" href="https://xuccc.github.io/CTF/Writeup/Pwnable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xu">
@@ -329,8 +344,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-01T23:32:10+08:00">
-                2017-09-01
+              <time title="更新于" itemprop="dateModified" datetime="2017-09-02T17:03:29+08:00">
+                2017-09-02
               </time>
             
           </span>
@@ -479,6 +494,7 @@
 </ul>
 <div class="note success"><p>Exp</p></div>
 <figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">random@ubuntu:~$ ./random </div><div class="line">3039230856</div><div class="line">Good!</div><div class="line">Mommy, I thought libc random is unpredictable...</div></pre></td></tr></table></figure>
+<h2 id="input"><a href="#input" class="headerlink" title="input"></a>input</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>* envp[])</span></span>&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Welcome to pwnable.kr\n"</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Let's see if you know how to give input to program\n"</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Just give me correct inputs then you will get the flag :)\n"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// argv</span></div><div class="line">        <span class="keyword">if</span>(argc != <span class="number">100</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'A'</span>],<span class="string">"\x00"</span>)) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'B'</span>],<span class="string">"\x20\x0a\x0d"</span>)) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Stage 1 clear!\n"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// stdio</span></div><div class="line">        <span class="keyword">char</span> buf[<span class="number">4</span>];</div><div class="line">        read(<span class="number">0</span>, buf, <span class="number">4</span>);</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">memcmp</span>(buf, <span class="string">"\x00\x0a\x00\xff"</span>, <span class="number">4</span>)) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        read(<span class="number">2</span>, buf, <span class="number">4</span>);</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">memcmp</span>(buf, <span class="string">"\x00\x0a\x02\xff"</span>, <span class="number">4</span>)) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Stage 2 clear!\n"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// env</span></div><div class="line">        <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="string">"\xca\xfe\xba\xbe"</span>, getenv(<span class="string">"\xde\xad\xbe\xef"</span>))) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Stage 3 clear!\n"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// file</span></div><div class="line">        FILE* fp = fopen(<span class="string">"\x0a"</span>, <span class="string">"r"</span>);</div><div class="line">        <span class="keyword">if</span>(!fp) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>( fread(buf, <span class="number">4</span>, <span class="number">1</span>, fp)!=<span class="number">1</span> ) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>( <span class="built_in">memcmp</span>(buf, <span class="string">"\x00\x00\x00\x00"</span>, <span class="number">4</span>) ) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        fclose(fp);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Stage 4 clear!\n"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// network</span></div><div class="line">        <span class="keyword">int</span> sd, cd;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">saddr</span>, <span class="title">caddr</span>;</span></div><div class="line">        sd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</div><div class="line">        <span class="keyword">if</span>(sd == <span class="number">-1</span>)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"socket error, tell admin\n"</span>);</div><div class="line">                <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        saddr.sin_family = AF_INET;</div><div class="line">        saddr.sin_addr.s_addr = INADDR_ANY;</div><div class="line">        saddr.sin_port = htons( atoi(argv[<span class="string">'C'</span>]) );</div><div class="line">        <span class="keyword">if</span>(bind(sd, (struct sockaddr*)&amp;saddr, <span class="keyword">sizeof</span>(saddr)) &lt; <span class="number">0</span>)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"bind error, use another port\n"</span>);</div><div class="line">                <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        listen(sd, <span class="number">1</span>);</div><div class="line">        <span class="keyword">int</span> c = <span class="keyword">sizeof</span>(struct sockaddr_in);</div><div class="line">        cd = accept(sd, (struct sockaddr *)&amp;caddr, (<span class="keyword">socklen_t</span>*)&amp;c);</div><div class="line">        <span class="keyword">if</span>(cd &lt; <span class="number">0</span>)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"accept error, tell admin\n"</span>);</div><div class="line">                <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>( recv(cd, buf, <span class="number">4</span>, <span class="number">0</span>) != <span class="number">4</span> ) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">memcmp</span>(buf, <span class="string">"\xde\xad\xbe\xef"</span>, <span class="number">4</span>)) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Stage 5 clear!\n"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// here's your flag</span></div><div class="line">        system(<span class="string">"/bin/cat flag"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&#123;% note info%&#125;</div><div class="line">Points</div><div class="line">&#123;% endnote %&#125;</div><div class="line"></div><div class="line"></div><div class="line">#### Stage1</div><div class="line"></div><div class="line">- Exactly <span class="number">100</span> arguments</div><div class="line">- The argument n0. <span class="number">65</span> (ascii value <span class="keyword">for</span> A) must be an empty <span class="built_in">string</span></div><div class="line">- The argument no. <span class="number">66</span> (ascii value <span class="keyword">for</span> B) must be \x20\x0a\x0d</div><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">[TODO](https:<span class="comment">//werewblog.wordpress.com/2016/01/11/pwnable-kr-input/)</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">## leg</div><div class="line"></div><div class="line">[TODO](http:<span class="comment">//blog.csdn.net/qq_19550513/article/details/62044968)</span></div><div class="line"></div><div class="line">## mistake</div><div class="line"></div><div class="line">```c</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;fcntl.h&gt;</div><div class="line"></div><div class="line">#define PW_LEN <span class="number">10</span></div><div class="line">#define XORKEY <span class="number">1</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> xor(<span class="keyword">char</span>* s, <span class="keyword">int</span> len)&#123;</div><div class="line">        <span class="keyword">int</span> i;</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;len; i++)&#123;</div><div class="line">                s[i] ^= XORKEY;</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])&#123;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> fd;</div><div class="line">        <span class="keyword">if</span>(fd=open(<span class="string">"/home/mistake/password"</span>,O_RDONLY,<span class="number">0400</span>) &lt; <span class="number">0</span>)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"can't open password %d\n"</span>, fd);</div><div class="line">                <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="built_in">printf</span>(<span class="string">"do not bruteforce...\n"</span>);</div><div class="line">        sleep(time(<span class="number">0</span>)%<span class="number">20</span>);</div><div class="line"></div><div class="line">        <span class="keyword">char</span> pw_buf[PW_LEN+<span class="number">1</span>];</div><div class="line">        <span class="keyword">int</span> len;</div><div class="line">        <span class="keyword">if</span>(!(len=read(fd,pw_buf,PW_LEN) &gt; <span class="number">0</span>))&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"read error\n"</span>);</div><div class="line">                close(fd);</div><div class="line">                <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">char</span> pw_buf2[PW_LEN+<span class="number">1</span>];</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"input password : "</span>);</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%10s"</span>, pw_buf2);</div><div class="line"></div><div class="line">        <span class="comment">// xor your input</span></div><div class="line">        xor(pw_buf2, <span class="number">10</span>);</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(!<span class="built_in">strncmp</span>(pw_buf, pw_buf2, PW_LEN))&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"Password OK\n"</span>);</div><div class="line">                system(<span class="string">"/bin/cat flag\n"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"Wrong Password\n"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        close(fd);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -675,7 +691,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#fd"><span class="nav-text">fd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collision"><span class="nav-text">collision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bof"><span class="nav-text">bof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flag"><span class="nav-text">flag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passcode"><span class="nav-text">passcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#random"><span class="nav-text">random</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#fd"><span class="nav-text">fd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collision"><span class="nav-text">collision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bof"><span class="nav-text">bof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flag"><span class="nav-text">flag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passcode"><span class="nav-text">passcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#random"><span class="nav-text">random</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input"><span class="nav-text">input</span></a></li></ol></div>
             
 
           </div>
@@ -715,7 +731,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.6k字</span>
+  <span class="post-count">博客全站共6.1k字</span>
 </div>
         
 
