@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xuccc.github.io/Frame/blog/</loc>
+    
+    <lastmod>2017-09-02T14:52:28.317Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xuccc.github.io/CTF/Writeup/Pwnable/</loc>
     
     <lastmod>2017-09-02T09:03:29.358Z</lastmod>

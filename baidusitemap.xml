@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://xuccc.github.io/Frame/blog/</loc>
+    <lastmod>2017-09-02T14:52:28.317Z</lastmod>
+    <data>
+        <display>
+        <title>blog</title>
+        <pubTime>2017-09-02T14:48:04.000Z</pubTime>
+        
+        <tag>Web</tag>
+         
+         
+           
+             
+              <breadCrumb title="Frame" url="https://xuccc.github.io/categories/Frame/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://xuccc.github.io/CTF/Writeup/Pwnable/</loc>
     <lastmod>2017-09-02T09:03:29.358Z</lastmod>
     <data>
