@@ -87,7 +87,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Misc," />
+  <meta name="keywords" content="CTF,Python," />
 
 
 
@@ -103,20 +103,20 @@
 
 
 
-<meta name="description" content="Break In 2017Mysterious GIF Step 1  binwalk 发现有额外数据 继续对temp.zip文件进行binwalk，发现有大量zip 解压出来是一堆加密过的文件  Step 2  继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取 $ identify -format &quot;%s %c \n&quot; Question.gif 0 4d494945">
-<meta name="keywords" content="Misc">
+<meta name="description" content="AWD 文章TODO AWD 工具TODO 自己的AWD工具AutoSubmitFlag  本着练习一下码代码的能力写了一份自动交flag的命令行脚本,主要实现  从命令行读取主要参数，平台地址，队伍Token，目标IP池等 Web直接读取Requestes信息，完成批量工具 批量后门种植工作   Pwn读取exp，完成批量攻击  每天写一点，断断续续写了一个星期。。写完回头看了下代码写得好丑感觉">
+<meta name="keywords" content="CTF,Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Routine Training:Misc">
-<meta property="og:url" content="https://xuccc.github.io/CTF/Writeup/RoutineTraining-Misc/index.html">
+<meta property="og:title" content="AWD-Tools">
+<meta property="og:url" content="https://xuccc.github.io/CTF/AWD/AWD-Tools/index.html">
 <meta property="og:site_name" content="Xu&#39;s Blog">
-<meta property="og:description" content="Break In 2017Mysterious GIF Step 1  binwalk 发现有额外数据 继续对temp.zip文件进行binwalk，发现有大量zip 解压出来是一堆加密过的文件  Step 2  继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取 $ identify -format &quot;%s %c \n&quot; Question.gif 0 4d494945">
+<meta property="og:description" content="AWD 文章TODO AWD 工具TODO 自己的AWD工具AutoSubmitFlag  本着练习一下码代码的能力写了一份自动交flag的命令行脚本,主要实现  从命令行读取主要参数，平台地址，队伍Token，目标IP池等 Web直接读取Requestes信息，完成批量工具 批量后门种植工作   Pwn读取exp，完成批量攻击  每天写一点，断断续续写了一个星期。。写完回头看了下代码写得好丑感觉">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://xuccc.github.io/CTF/Writeup/RoutineTraining-Misc/Usb%20Probing">
-<meta property="og:updated_time" content="2017-08-25T09:55:47.467Z">
+<meta property="og:image" content="https://xuccc.github.io/CTF/AWD/AWD-Tools/home.png">
+<meta property="og:updated_time" content="2017-10-20T14:05:50.398Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Routine Training:Misc">
-<meta name="twitter:description" content="Break In 2017Mysterious GIF Step 1  binwalk 发现有额外数据 继续对temp.zip文件进行binwalk，发现有大量zip 解压出来是一堆加密过的文件  Step 2  继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取 $ identify -format &quot;%s %c \n&quot; Question.gif 0 4d494945">
-<meta name="twitter:image" content="https://xuccc.github.io/CTF/Writeup/RoutineTraining-Misc/Usb%20Probing">
+<meta name="twitter:title" content="AWD-Tools">
+<meta name="twitter:description" content="AWD 文章TODO AWD 工具TODO 自己的AWD工具AutoSubmitFlag  本着练习一下码代码的能力写了一份自动交flag的命令行脚本,主要实现  从命令行读取主要参数，平台地址，队伍Token，目标IP池等 Web直接读取Requestes信息，完成批量工具 批量后门种植工作   Pwn读取exp，完成批量攻击  每天写一点，断断续续写了一个星期。。写完回头看了下代码写得好丑感觉">
+<meta name="twitter:image" content="https://xuccc.github.io/CTF/AWD/AWD-Tools/home.png">
 
 
 
@@ -145,14 +145,14 @@
 
 
 
-  <link rel="canonical" href="https://xuccc.github.io/CTF/Writeup/RoutineTraining-Misc/"/>
+  <link rel="canonical" href="https://xuccc.github.io/CTF/AWD/AWD-Tools/"/>
 
 
 
 
 
 
-  <title>Routine Training:Misc | Xu's Blog</title>
+  <title>AWD-Tools | Xu's Blog</title>
   
 
 
@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xuccc.github.io/CTF/Writeup/RoutineTraining-Misc/">
+    <link itemprop="mainEntityOfPage" href="https://xuccc.github.io/CTF/AWD/AWD-Tools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xu">
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Routine Training:Misc</h1>
+          <h1 class="post-title" itemprop="name headline">AWD-Tools</h1>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-08T16:17:38+08:00">
-                2017-08-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T20:26:10+08:00">
+                2017-10-20
               </time>
             
 
@@ -342,8 +342,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-25T17:55:47+08:00">
-                2017-08-25
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-20T22:05:50+08:00">
+                2017-10-20
               </time>
             
           </span>
@@ -372,8 +372,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/Writeup/" itemprop="url" rel="index">
-                    <span itemprop="name">Writeup</span>
+                  <a href="/categories/CTF/AWD/" itemprop="url" rel="index">
+                    <span itemprop="name">AWD</span>
                   </a>
                 </span>
 
@@ -409,45 +409,38 @@
       
 
       
-        <h2 id="Break-In-2017"><a href="#Break-In-2017" class="headerlink" title="Break In 2017"></a>Break In 2017</h2><h3 id="Mysterious-GIF"><a href="#Mysterious-GIF" class="headerlink" title="Mysterious GIF"></a>Mysterious GIF</h3><ul>
-<li>Step 1</li>
-</ul>
-<p><code>binwalk</code> 发现有额外数据</p>
-<p>继续对<code>temp.zip</code>文件进行<code>binwalk</code>，发现有大量<code>zip</code></p>
-<p>解压出来是一堆加密过的文件</p>
+        <h2 id="AWD-文章"><a href="#AWD-文章" class="headerlink" title="AWD 文章"></a>AWD 文章</h2><p>TODO</p>
+<h2 id="AWD-工具"><a href="#AWD-工具" class="headerlink" title="AWD 工具"></a>AWD 工具</h2><p>TODO</p>
+<h2 id="自己的AWD工具"><a href="#自己的AWD工具" class="headerlink" title="自己的AWD工具"></a>自己的AWD工具</h2><h3 id="AutoSubmitFlag"><a href="#AutoSubmitFlag" class="headerlink" title="AutoSubmitFlag"></a>AutoSubmitFlag</h3><p>  本着练习一下码代码的能力写了一份自动交flag的命令行脚本,主要实现</p>
 <ul>
-<li>Step 2</li>
+<li>从命令行读取主要参数，平台地址，队伍Token，目标IP池等</li>
+<li>Web直接读取Requestes信息，完成批量工具<ul>
+<li>批量后门种植工作</li>
 </ul>
-<p>继续分析gif文件，发现每一帧文件的metadata出有异常数据，尝试进行提取</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span> identify -format "%s %c \n" Question.gif </div><div class="line">0 4d494945767749424144414e42676b71686b6947397730424151454641415343424b6b776767536c41674541416f4942415144644d4e624c3571565769435172</div><div class="line">...</div><div class="line">24 484b7735432b667741586c4649746d30396145565458772b787a4c4a623253723667415450574d35715661756278667362356d58482f77443969434c684a536f</div></pre></td></tr></table></figure>
+</li>
+<li>Pwn读取exp，完成批量攻击</li>
+</ul>
+<p>每天写一点，断断续续写了一个星期。。写完回头看了下代码写得好丑感觉。。考完期中考试有空还是重构一下 = =</p>
+<p><img src="/CTF/AWD/AWD-Tools/home.png" alt="home"></p>
+<h4 id="主要用到的库"><a href="#主要用到的库" class="headerlink" title="主要用到的库"></a>主要用到的库</h4><ul>
+<li><a href="http://click.pocoo.org/dev/" target="_blank" rel="external">click</a>命令行参数解析</li>
+<li><a href="http://cn.python-requests.org/zh_CN/latest/" target="_blank" rel="external">Requestes</a>不解释</li>
+<li>urlparse url 分割及参数提取</li>
+<li><a href="https://pypi.python.org/pypi/PrettyTable" target="_blank" rel="external">prettytable</a>表格化输出</li>
+</ul>
+<h4 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h4><p>写完看了下好像也没啥，然而写的时候各种googlge。。</p>
 <ul>
-<li>Step 3</li>
+<li>错误处理</li>
 </ul>
-<p>base64 解码得到</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDdMNbL5qVWiCQr</div><div class="line">X2w69q/7y3ShIPueptxfAwRQbROre30c6Uw/oK8weZTx44m0ALouhV46KcQJkhrq</div><div class="line">...</div><div class="line">HKw5C+fwAXlFItm09aEVTXw+xzLJb2Sr6gATPWM5qVaubxfsb5mXH/wD9iCLhJSo</div><div class="line">rK0RHZktPbEs5ytDsqBHd5PFFw==</div></pre></td></tr></table></figure>
-<p>猜测为公玥文件</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span>:</div><div class="line">    req = eval(exp)</div><div class="line"></div><div class="line"><span class="keyword">except</span> SyntaxError, e:</div><div class="line">    log.error(<span class="string">'The input file maybe wrong'</span> % e.__class__.__name__)</div><div class="line">    <span class="keyword">return</span> <span class="string">'Input ERROR'</span>, <span class="keyword">None</span></div><div class="line"><span class="keyword">except</span> Exception, e:</div><div class="line">    log.error(<span class="string">'IP:%s Port:%s is outline:%s'</span> % (ip,port,e.__class__.__name__))</div><div class="line">    <span class="keyword">return</span> <span class="string">'Connection ERROR'</span>, <span class="keyword">None</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">    html = req.content</div><div class="line">    flag = FLAG_PATTERN.findall(html)</div><div class="line">    <span class="keyword">if</span> flag:</div><div class="line">        log.success(<span class="string">'IP:%s Port:%s Flag: %s'</span> % (ip, port, flag[<span class="number">0</span>]))</div><div class="line">        <span class="keyword">return</span> <span class="string">'Success'</span>, flag[<span class="number">0</span>]</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        log.warn(<span class="string">'IP:%s Port:%s is reinforced'</span> % (ip, port))</div><div class="line">        <span class="keyword">return</span> <span class="string">'Miss'</span>,<span class="keyword">None</span></div></pre></td></tr></table></figure>
 <ul>
-<li>Step 4</li>
+<li>命令行参数解析</li>
 </ul>
-<p>对由<code>temp.zip</code>得到的一堆文件进行解密</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span>openssl rsautl -decrypt -inkey ../key -in partaa.enc </div><div class="line">JFIFC</div></pre></td></tr></table></figure>
-<p>有第一份文件解密结果猜测此为一个完整的Jpg文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span> for i in `ls`</div><div class="line"><span class="meta">&gt;</span>&gt; do</div><div class="line"><span class="meta">&gt;</span>&gt; openssl rsautl -decrypt -inkey ../key  -in $i &gt;&gt; flag.jpg</div><div class="line"><span class="meta">&gt;</span>&gt; done</div></pre></td></tr></table></figure>
-<h2 id="AlexCTF-2017"><a href="#AlexCTF-2017" class="headerlink" title="AlexCTF-2017"></a>AlexCTF-2017</h2><h3 id="USB-probing"><a href="#USB-probing" class="headerlink" title="USB probing"></a>USB probing</h3><ul>
-<li>Step 1</li>
-</ul>
-<p><code>binwalk</code> 发现存在<code>png</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="meta">@cli.command('auto')</span></div><div class="line"><span class="meta">@click.argument('platform', metavar='&lt;Platform Url&gt;')</span></div><div class="line"><span class="meta">@click.argument('ips',metavar='&lt;Target IPs&gt;')</span></div><div class="line"><span class="meta">@click.option('--method', '-m', default='post', type=click.Choice(['get', 'post']),</span></div><div class="line">              help=<span class="string">'Method to submit flag'</span>)</div><div class="line"><span class="meta">@click.option('--token', help='Your Team Token')</span></div><div class="line"><span class="meta">@click.option('--delete', '-d', multiple=True, help='Delete the ip from ipList')</span></div><div class="line"><span class="meta">@click.option('--payload', '-p', nargs=3, multiple=True,</span></div><div class="line">              help=<span class="string">"Web payload with 3 arguments:url,method,query"</span>)</div><div class="line"><span class="meta">@click.option('--web', type=click.File('rb'),help="Load web payload from file")</span></div><div class="line"><span class="meta">@click.option('--pwn',multiple=True,type=click.File('rb'))</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">auto</span><span class="params">(platform, ips, method, token, delete, payload, web, pwn)</span>:</span></div></pre></td></tr></table></figure>
 <ul>
-<li>Step 2</li>
+<li>动态加载</li>
 </ul>
-<p>分析协议后使用<code>tshark</code>进行提取</p>
-<p><code>tshark -r Usb-probing.pcap -T fields -e usb.capdata|tr -d &#39;:&#39;|tr -d &#39;\n&#39;|grep &quot;8950\w*&quot; -o &gt; raw</code></p>
-<ul>
-<li>Step 3</li>
-</ul>
-<p>还原为png图片</p>
-<p><code>xxd -p -r raw png</code></p>
-<p><img src="/CTF/Writeup/RoutineTraining-Misc/Usb Probing" alt="Usb Probing"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">frompwn</span><span class="params">(self,ip,file)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        flag = __import__(file).exploit(ip)</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -465,7 +458,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Misc/" rel="tag"><i class="fa fa-tag"></i> Misc</a>
+            <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           
         </div>
       
@@ -478,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/CTF/Pwn/栈溢出/" rel="next" title="栈溢出">
-                <i class="fa fa-chevron-left"></i> 栈溢出
+              <a href="/CTF/Pwn/堆溢出/" rel="next" title="堆溢出">
+                <i class="fa fa-chevron-left"></i> 堆溢出
               </a>
             
           </div>
@@ -487,10 +482,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/CTF/Writeup/Nebula/" rel="prev" title="Nebula">
-                Nebula <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -648,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Break-In-2017"><span class="nav-text">Break In 2017</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysterious-GIF"><span class="nav-text">Mysterious GIF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AlexCTF-2017"><span class="nav-text">AlexCTF-2017</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#USB-probing"><span class="nav-text">USB probing</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AWD-文章"><span class="nav-text">AWD 文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AWD-工具"><span class="nav-text">AWD 工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己的AWD工具"><span class="nav-text">自己的AWD工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoSubmitFlag"><span class="nav-text">AutoSubmitFlag</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要用到的库"><span class="nav-text">主要用到的库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tips"><span class="nav-text">Tips</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
